@@ -1,0 +1,39 @@
+.main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+.main__form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.main__form label {
+  display: block;
+  margin-top: 1rem;
+  margin-bottom: 10px;
+}
+.main__form input {
+  height: 25px;
+  width: 250px;
+  border: solid #e7ebdc;
+  background-color: #e7ebdc;
+  border-radius: 5px;
+  color: #444444;
+}
+.main__form .address {
+  margin-top: 10px;
+  padding: 12px;
+}
+.main button {
+  width: 100px;
+  height: 35px;
+  margin-top: 30px;
+  background-color: #5a6f07;
+  color: white;
+  font-size: larger;
+  border: none;
+  border-radius: 5px;
+}/*# sourceMappingURL=home.css.map */

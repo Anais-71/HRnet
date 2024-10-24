@@ -1,0 +1,10 @@
+@import '../../assets/style/variables';
+
+.select {
+  width: 100%;
+  background-color: $background;
+  height: 25px;
+  border: none;
+  border-radius: 5px;
+  color: $darkest;
+}

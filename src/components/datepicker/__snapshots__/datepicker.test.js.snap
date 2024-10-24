@@ -1,0 +1,26 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Datepicker component matches snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="datepicker"
+  >
+    <label
+      for="datepicker"
+    >
+      Select a date:
+    </label>
+     
+    <input
+      aria-expanded="false"
+      aria-haspopup="true"
+      autocomplete="off"
+      id="datepicker"
+      placeholder="Please select a date"
+      readonly=""
+      type="text"
+      value=""
+    />
+  </div>
+</DocumentFragment>
+`;

@@ -1,0 +1,21 @@
+@import '../../assets/style/variables';
+
+.header {
+  display: flex;
+  width: 100%;
+  height: 5rem;
+  align-items: center;
+  padding: 10px;
+  margin-bottom: 30px;
+  justify-content: space-between;
+
+  img {
+    height: 100%;
+  }
+
+  &__nav {
+    display: flex;
+    gap: 15px;
+    font-weight: $regular;
+  }
+}
