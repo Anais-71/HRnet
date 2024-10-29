@@ -50,11 +50,21 @@ const Home = ({ setEmployees }) => {
 
   return (
     <div className="main">
-      <h1 className="main__title">HRnet</h1>
-      <h2 className="main__subtitle">Create employee</h2>
+      <div className="main__header">
+        <div className="main__header--icon">
+          <i className="fa-solid fa-pen"></i>
+        </div>
+        <h2 className="main__header--title">Create employee</h2>
+      </div>
 
-      <div className="main__form">
-        <form action="#" id="create-employee">
+      <form action="#" id="create-employee" className="main__form">
+        <div className="form__section">
+          <div className="form__section--header">
+            <div className="form__section--icon">
+              <i className="fa-solid fa-user"></i>
+            </div>
+            <div className="form__section--title">Details</div>
+          </div>
           <label htmlFor="first-name">First Name</label>
           <input
             type="text"
@@ -74,52 +84,67 @@ const Home = ({ setEmployees }) => {
             autoComplete="family-name"
           />
           <label htmlFor="date-of-birth">Date of Birth</label>
-          <Datepicker idPrefix="date-of-birth" /> {/* Passer l'ID ici */}
+          <Datepicker className="datepicker" idPrefix="date-of-birth" />
+        </div>
+        <div className="form__section">
+          <div className="form__section--header">
+            <div className="form__section--icon">
+              <i className="fa-solid fa-location-dot"></i>
+            </div>
+            <div className="form__section--title">Address</div>
+          </div>
+
+          <label htmlFor="street">Street</label>
+          <input
+            id="street"
+            type="text"
+            name="street"
+            value={employeeData.street}
+            onChange={handleChange}
+            autoComplete="street-address"
+          />
+
+          <label htmlFor="city">City</label>
+          <input
+            id="city"
+            type="text"
+            name="city"
+            value={employeeData.city}
+            onChange={handleChange}
+            autoComplete="address-level2"
+          />
+
+          <Select
+            className="select"
+            options={states}
+            label="State"
+            value={employeeData.state}
+            onChange={handleChange}
+            name="state"
+            valueField="abbreviation"
+            labelField="name"
+          />
+
+          <label htmlFor="zip-code">Zip Code</label>
+          <input
+            id="zip-code"
+            type="number"
+            name="zipCode"
+            value={employeeData.zipCode}
+            onChange={handleChange}
+            autoComplete="postal-code"
+          />
+        </div>
+
+        <div className="form__section">
+          <div className="form__section--header">
+            <div className="form__section--icon">
+              <i className="fa-solid fa-briefcase"></i>
+            </div>
+            <div className="form__section--title">Position</div>
+          </div>
           <label htmlFor="start-date">Start Date</label>
-          <Datepicker idPrefix="start-date" /> {/* Passer l'ID ici */}
-          <fieldset className="address">
-            <legend>Address</legend>
-
-            <label htmlFor="street">Street</label>
-            <input
-              id="street"
-              type="text"
-              name="street"
-              value={employeeData.street}
-              onChange={handleChange}
-              autoComplete="street-address"
-            />
-
-            <label htmlFor="city">City</label>
-            <input
-              id="city"
-              type="text"
-              name="city"
-              value={employeeData.city}
-              onChange={handleChange}
-              autoComplete="address-level2"
-            />
-
-            <Select
-              options={states}
-              label="State"
-              value={employeeData.state}
-              onChange={handleChange}
-              name="state"
-              valueField="abbreviation"
-              labelField="name"
-            />
-
-            <label htmlFor="zip-code">Zip Code</label>
-            <input
-              id="zip-code"
-              type="number"
-              name="zipCode"
-              value={employeeData.zipCode}
-              onChange={handleChange}
-              autoComplete="postal-code"
-            />
-          </fieldset>
+          <Datepicker idPrefix="start-date" />
           <Select
             options={department}
             label="Department"
@@ -129,9 +154,9 @@ const Home = ({ setEmployees }) => {
             valueField="id"
             labelField="name"
           />
-        </form>
-        <button onClick={saveEmployee}>Save</button>
-      </div>
+        </div>
+      </form>
+      <button onClick={saveEmployee}>Save</button>
     </div>
   )
 }

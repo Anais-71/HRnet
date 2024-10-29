@@ -1,0 +1,34 @@
+@import '../../assets/style/variables';
+
+.table {
+  margin-top: 20px;
+  width: '100%';
+  border-collapse: collapse;
+
+  &__controls {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__head {
+    height: 35px;
+    font-weight: $light;
+    text-align: left;
+    background-color: $background;
+  }
+
+  &__col {
+    width: 120px;
+    text-align: left;
+    padding-left: 10px;
+    color: $darkest;
+  }
+
+  &__row {
+    height: 35px;
+  }
+
+  &__btn {
+    width: 20px;
+  }
+}

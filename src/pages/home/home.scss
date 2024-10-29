@@ -3,44 +3,133 @@
 .main {
   display: flex;
   flex-direction: column;
-  align-items: center;
   gap: 12px;
+  width: 91%;
+  margin-left: 5%;
+  padding: 24px 21px 31px 21px;
+  border-radius: 35px;
+  box-shadow: 10px 20px 27px 0px rgba(0, 0, 0, 0.29);
 
-  &__form {
+  &__header {
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    align-items: flex-start;
+    gap: 35px;
 
-    label {
-      display: block;
-      margin-top: 1rem;
-      margin-bottom: 10px;
-    }
-
-    input {
-      height: 25px;
-      width: 250px;
-      border: solid $background;
-      background-color: $background;
+    &--icon {
       border-radius: 5px;
-      color: $darkest;
+      background-color: $light-green;
+      width: 46px;
+      height: 46px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      .fa-solid {
+        color: $dark;
+        font-size: 24px;
+      }
     }
 
-    .address {
-      margin-top: 10px;
-      padding: 12px;
+    &--title {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: $darkest;
+      margin-bottom: 20px;
     }
   }
 
+  &__form {
+    display: flex;
+    justify-content: space-between;
+
+    .form__section {
+      background-color: rgba(231, 237, 188, 0.23);
+      padding: 15px;
+      margin-bottom: 20px;
+      border-radius: 8px;
+      width: 32%;
+
+      &--header {
+        display: flex;
+        align-items: center;
+        margin-bottom: 51px;
+        margin-top: 10px;
+        gap: 16px;
+      }
+
+      &--icon {
+        border-radius: 5px;
+        background-color: $light-green;
+        width: 46px;
+        height: 46px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        .fa-solid {
+          color: $dark;
+          font-size: 24px;
+        }
+      }
+
+      &--title {
+        font-size: 1.25rem;
+        font-weight: bold;
+        color: $darkest;
+      }
+
+      label {
+        display: inline-block;
+        width: 30%;
+        text-align: left;
+        font-size: 1rem;
+        color: $darkest;
+        margin-right: 10px;
+      }
+
+      input,
+      .select {
+        display: inline-block;
+        width: 64%;
+        padding: 5px;
+        height: 34px;
+        border: solid 1px $background;
+        background-color: $background;
+        border-radius: 5px;
+        color: $darkest;
+        font-size: 1rem;
+        text-align: left;
+        margin-bottom: 25px;
+      }
+
+      .form__field {
+        display: flex;
+        align-items: center;
+        margin-top: 1rem;
+      }
+    }
+  }
+
+  .datepicker {
+    display: inline-block;
+    width: 60%;
+  }
+
   button {
-    width: 100px;
-    height: 35px;
+    width: 150px;
+    height: 50px;
     margin-top: 30px;
+    margin-bottom: 30px;
     background-color: $dark;
     color: white;
-    font-size: larger;
+    font-size: 1.5rem;
     border: none;
     border-radius: 5px;
+    cursor: pointer;
+    align-self: flex-end;
+
+    &:hover {
+      background-color: darken($dark, 10%);
+    }
   }
 }

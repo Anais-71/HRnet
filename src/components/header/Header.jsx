@@ -6,12 +6,15 @@ import './header.css'
 function Header() {
   return (
     <div className="header">
-      <img className="logo" src={logo} alt="Logo Wealth Health" />
+      <div className="header__main">
+        <img className="header__logo" src={logo} alt="Logo Wealth Health" />
+        <h1 className="header__title">HRnet</h1>
+      </div>
       <div className="header__nav">
         <a className="header__nav--link" href="/">
           Create Employee
         </a>
-        <a className="header__nav--link" href="#">
+        <a className="header__nav--link" href="/employees">
           View Current Employees
         </a>
       </div>

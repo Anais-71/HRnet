@@ -1,39 +1,117 @@
 .main {
   display: flex;
   flex-direction: column;
-  align-items: center;
   gap: 12px;
+  width: 91%;
+  margin-left: 5%;
+  padding: 24px 21px 31px 21px;
+  border-radius: 35px;
+  box-shadow: 10px 20px 27px 0px rgba(0, 0, 0, 0.29);
 }
-.main__form {
+.main__header {
   display: flex;
-  flex-direction: column;
+  align-items: flex-start;
+  gap: 35px;
+}
+.main__header--icon {
+  border-radius: 5px;
+  background-color: #93ad18;
+  width: 46px;
+  height: 46px;
+  display: flex;
   align-items: center;
   justify-content: center;
 }
-.main__form label {
-  display: block;
-  margin-top: 1rem;
-  margin-bottom: 10px;
+.main__header--icon .fa-solid {
+  color: #5a6f07;
+  font-size: 24px;
 }
-.main__form input {
-  height: 25px;
-  width: 250px;
-  border: solid #e7ebdc;
+.main__header--title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #444444;
+  margin-bottom: 20px;
+}
+.main__form {
+  display: flex;
+  justify-content: space-between;
+}
+.main__form .form__section {
+  background-color: rgba(231, 237, 188, 0.23);
+  padding: 15px;
+  margin-bottom: 20px;
+  border-radius: 8px;
+  width: 32%;
+}
+.main__form .form__section--header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 51px;
+  margin-top: 10px;
+  gap: 16px;
+}
+.main__form .form__section--icon {
+  border-radius: 5px;
+  background-color: #93ad18;
+  width: 46px;
+  height: 46px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.main__form .form__section--icon .fa-solid {
+  color: #5a6f07;
+  font-size: 24px;
+}
+.main__form .form__section--title {
+  font-size: 1.25rem;
+  font-weight: bold;
+  color: #444444;
+}
+.main__form .form__section label {
+  display: inline-block;
+  width: 30%;
+  text-align: left;
+  font-size: 1rem;
+  color: #444444;
+  margin-right: 10px;
+}
+.main__form .form__section input,
+.main__form .form__section .select {
+  display: inline-block;
+  width: 64%;
+  padding: 5px;
+  height: 34px;
+  border: solid 1px #e7ebdc;
   background-color: #e7ebdc;
   border-radius: 5px;
   color: #444444;
+  font-size: 1rem;
+  text-align: left;
+  margin-bottom: 25px;
 }
-.main__form .address {
-  margin-top: 10px;
-  padding: 12px;
+.main__form .form__section .form__field {
+  display: flex;
+  align-items: center;
+  margin-top: 1rem;
+}
+.main .datepicker {
+  display: inline-block;
+  width: 60%;
 }
 .main button {
-  width: 100px;
-  height: 35px;
+  width: 150px;
+  height: 50px;
   margin-top: 30px;
+  margin-bottom: 30px;
   background-color: #5a6f07;
   color: white;
-  font-size: larger;
+  font-size: 1.5rem;
   border: none;
   border-radius: 5px;
+  cursor: pointer;
+  align-self: flex-end;
+}
+.main button:hover {
+  background-color: #333f04;
 }/*# sourceMappingURL=home.css.map */

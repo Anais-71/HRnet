@@ -71,7 +71,6 @@ const Datepicker = ({ idPrefix }) => {
 
   return (
     <div className="datepicker">
-      <label htmlFor={idPrefix}>Select a date:</label>{' '}
       <input
         type="text"
         id={idPrefix}
@@ -83,6 +82,7 @@ const Datepicker = ({ idPrefix }) => {
         aria-expanded={isOpen}
         autoComplete="off"
       />
+
       {isOpen && (
         <div className="datepicker__calendar" role="dialog" aria-modal="true">
           <div className="datepicker__controls">

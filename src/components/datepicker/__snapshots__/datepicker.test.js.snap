@@ -5,12 +5,6 @@ exports[`Datepicker component matches snapshot 1`] = `
   <div
     class="datepicker"
   >
-    <label
-      for="datepicker"
-    >
-      Select a date:
-    </label>
-     
     <input
       aria-expanded="false"
       aria-haspopup="true"

@@ -1,0 +1,27 @@
+.table {
+  margin-top: 20px;
+  width: "100%";
+  border-collapse: collapse;
+}
+.table__controls {
+  display: flex;
+  justify-content: space-between;
+}
+.table__head {
+  height: 35px;
+  font-weight: 100;
+  text-align: left;
+  background-color: #e7ebdc;
+}
+.table__col {
+  width: 120px;
+  text-align: left;
+  padding-left: 10px;
+  color: #444444;
+}
+.table__row {
+  height: 35px;
+}
+.table__btn {
+  width: 20px;
+}/*# sourceMappingURL=table.css.map */

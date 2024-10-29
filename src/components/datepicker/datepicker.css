@@ -2,9 +2,11 @@
   color: #4c4c4c;
 }
 .datepicker__calendar {
-  margin-top: 10px;
+  width: fit-content;
+  margin-bottom: 20px;
   padding: 12px;
   border: solid 1px #e7ebdc;
+  background-color: rgba(231, 237, 188, 0.23);
   border-radius: 5px;
   display: flex;
   flex-direction: column;
@@ -30,7 +32,7 @@
 .datepicker__controls {
   display: flex;
   width: 100%;
-  gap: 20px;
+  gap: 10px;
   margin-bottom: 15px;
 }
 .datepicker__controls select {
