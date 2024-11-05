@@ -20,4 +20,18 @@
     font-weight: $bold;
     color: $dark;
   }
+
+  .icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: $light-green;
+    width: 46px;
+    height: 46px;
+    border-radius: 5px;
+    &__fa {
+      color: $dark;
+      height: 25px;
+    }
+  }
 }

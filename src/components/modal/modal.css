@@ -1,14 +1,64 @@
 .modal {
+  display: flex;
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(231, 237, 188, 0.53);
+  justify-content: center;
+  align-items: center;
 }
 .modal__popup {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   background-color: white;
   padding: 20px;
-  margin: 15% auto;
-  width: 50%;
+  width: 88.5%;
+  height: 28%;
+  border-radius: 25px;
+  box-shadow: 10px 20px 27px 0px rgba(0, 0, 0, 0.25);
+}
+.modal__popup--close {
+  position: absolute;
+  top: 25px;
+  right: 25px;
+}
+.modal__popup--close--icon {
+  width: 31px;
+  height: 31px;
+  color: #5a6f07;
+}
+.modal__popup--message {
+  font-size: 2.25rem;
+  font-weight: 500;
+  color: #5a6f07;
+  margin-top: 15px;
+}
+.modal__popup--buttons {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  width: 100%;
+}
+.modal__popup--buttons--btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 25%;
+  height: 51px;
+  font-size: 1rem;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  background-color: #5a6f07;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.modal__popup--buttons--btn:hover {
+  background-color: #333f04;
 }/*# sourceMappingURL=modal.css.map */

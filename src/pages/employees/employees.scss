@@ -1,0 +1,25 @@
+@import '../../assets/style/variables';
+
+.main {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 91%;
+  margin-left: 5%;
+  padding: 24px 21px 31px 21px;
+  border-radius: 35px;
+  box-shadow: 10px 20px 27px 0px rgba(0, 0, 0, 0.29);
+
+  &__header {
+    display: flex;
+    align-items: flex-start;
+    gap: 35px;
+
+    &--title {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: $darkest;
+      margin-bottom: 20px;
+    }
+  }
+}

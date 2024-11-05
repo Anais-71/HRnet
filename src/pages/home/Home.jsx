@@ -3,20 +3,34 @@ import { states } from './states'
 import { department } from './department'
 import './home.css'
 
+// Components
 import Datepicker from '../../components/datepicker/Datepicker'
 import Select from '../../components/select/Select'
+import Modal from '../../components/modal/Modal'
+import { useEmployeeContext } from '../employees/EmployeesContext'
 
-const Home = ({ setEmployees }) => {
+// Icons
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import {
+  faPen,
+  faUser,
+  faLocationDot,
+  faBriefcase,
+} from '@fortawesome/free-solid-svg-icons'
+
+const Home = () => {
+  const { employees, setEmployees } = useEmployeeContext()
+
   const [employeeData, setEmployeeData] = useState({
     firstName: '',
     lastName: '',
-    dateOfBirth: '',
-    startDate: '',
     street: '',
     city: '',
     state: '',
     zipCode: '',
     department: '',
+    dateOfBirth: '',
+    startDate: '',
   })
 
   const handleChange = (e) => {
@@ -27,41 +41,41 @@ const Home = ({ setEmployees }) => {
     }))
   }
 
-  const saveEmployee = (e) => {
-    e.preventDefault()
-    const employees = JSON.parse(localStorage.getItem('employees')) || []
-    employees.push(employeeData)
-    localStorage.setItem('employees', JSON.stringify(employees))
+  const saveEmployee = () => {
+    const newEmployee = { ...employeeData }
 
-    setEmployeeData({
-      firstName: '',
-      lastName: '',
-      dateOfBirth: '',
-      startDate: '',
-      street: '',
-      city: '',
-      state: '',
-      zipCode: '',
-      department: '',
-    })
-
-    setEmployees(employees)
+    // Mettre à jour la liste des employés
+    setEmployees(newEmployee) < // Enregistre le nouvel employé dans le contexte
+      //ouvrir le modal
+      Modal >
+      // Réinitialiser le formulaire après l'enregistrement
+      setEmployeeData({
+        firstName: '',
+        lastName: '',
+        street: '',
+        city: '',
+        state: '',
+        zipCode: '',
+        department: '',
+        dateOfBirth: '',
+        startDate: '',
+      })
   }
 
   return (
     <div className="main">
       <div className="main__header">
-        <div className="main__header--icon">
-          <i className="fa-solid fa-pen"></i>
+        <div className="main__header--icon icon">
+          <FontAwesomeIcon icon={faPen} className="icon__fa" />
         </div>
         <h2 className="main__header--title">Create employee</h2>
       </div>
 
-      <form action="#" id="create-employee" className="main__form">
+      <form id="create-employee" className="main__form">
         <div className="form__section">
           <div className="form__section--header">
-            <div className="form__section--icon">
-              <i className="fa-solid fa-user"></i>
+            <div className="form__section--icon icon">
+              <FontAwesomeIcon icon={faUser} className="icon__fa" />
             </div>
             <div className="form__section--title">Details</div>
           </div>
@@ -84,16 +98,24 @@ const Home = ({ setEmployees }) => {
             autoComplete="family-name"
           />
           <label htmlFor="date-of-birth">Date of Birth</label>
-          <Datepicker className="datepicker" idPrefix="date-of-birth" />
+          <Datepicker
+            idPrefix="date-of-birth"
+            onChange={(date) =>
+              setEmployeeData((prevData) => ({
+                ...prevData,
+                dateOfBirth: date,
+              }))
+            }
+          />
         </div>
+
         <div className="form__section">
           <div className="form__section--header">
-            <div className="form__section--icon">
-              <i className="fa-solid fa-location-dot"></i>
+            <div className="form__section--icon icon">
+              <FontAwesomeIcon icon={faLocationDot} className="icon__fa" />
             </div>
             <div className="form__section--title">Address</div>
           </div>
-
           <label htmlFor="street">Street</label>
           <input
             id="street"
@@ -115,11 +137,15 @@ const Home = ({ setEmployees }) => {
           />
 
           <Select
-            className="select"
             options={states}
             label="State"
             value={employeeData.state}
-            onChange={handleChange}
+            onChange={(e) =>
+              setEmployeeData((prevData) => ({
+                ...prevData,
+                state: e.target.value,
+              }))
+            }
             name="state"
             valueField="abbreviation"
             labelField="name"
@@ -138,20 +164,30 @@ const Home = ({ setEmployees }) => {
 
         <div className="form__section">
           <div className="form__section--header">
-            <div className="form__section--icon">
-              <i className="fa-solid fa-briefcase"></i>
+            <div className="form__section--icon icon">
+              <FontAwesomeIcon icon={faBriefcase} className="icon__fa" />
             </div>
             <div className="form__section--title">Position</div>
           </div>
           <label htmlFor="start-date">Start Date</label>
-          <Datepicker idPrefix="start-date" />
+          <Datepicker
+            idPrefix="start-date"
+            onChange={(date) =>
+              setEmployeeData((prevData) => ({ ...prevData, startDate: date }))
+            }
+          />
           <Select
             options={department}
             label="Department"
             value={employeeData.department}
-            onChange={handleChange}
+            onChange={(e) =>
+              setEmployeeData((prevData) => ({
+                ...prevData,
+                department: e.target.value,
+              }))
+            }
             name="department"
-            valueField="id"
+            valueField="name"
             labelField="name"
           />
         </div>

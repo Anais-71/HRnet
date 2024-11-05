@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import './Datepicker.css'
 
-const Datepicker = ({ idPrefix }) => {
+const Datepicker = ({ idPrefix, onChange }) => {
   const [isOpen, setIsOpen] = useState(false)
   const [selectedDate, setSelectedDate] = useState('')
   const [currentMonth, setCurrentMonth] = useState(new Date().getMonth())
@@ -21,7 +21,6 @@ const Datepicker = ({ idPrefix }) => {
     'November',
     'December',
   ]
-
   const weekdays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
 
   const daysInMonth = (month, year) => new Date(year, month + 1, 0).getDate()
@@ -30,6 +29,7 @@ const Datepicker = ({ idPrefix }) => {
     const formattedDate = `${day}/${currentMonth + 1}/${currentYear}`
     setSelectedDate(formattedDate)
     setIsOpen(false)
+    onChange(formattedDate) // Envoie la date sélectionnée au parent
   }
 
   const renderCalendar = () => {
@@ -37,14 +37,12 @@ const Datepicker = ({ idPrefix }) => {
     const totalDays = daysInMonth(currentMonth, currentYear)
     const firstDayIndex = new Date(currentYear, currentMonth, 1).getDay()
 
-    // Render empty slots before first day
     for (let i = 0; i < firstDayIndex; i++) {
       days.push(
         <div key={`empty-${i}`} className="datepicker__grid--day empty"></div>,
       )
     }
 
-    // Render days of the month
     for (let day = 1; day <= totalDays; day++) {
       days.push(
         <div
@@ -82,11 +80,10 @@ const Datepicker = ({ idPrefix }) => {
         aria-expanded={isOpen}
         autoComplete="off"
       />
-
       {isOpen && (
         <div className="datepicker__calendar" role="dialog" aria-modal="true">
           <div className="datepicker__controls">
-            <label htmlFor={`${idPrefix}-month`}>Month:</label>{' '}
+            <label htmlFor={`${idPrefix}-month`}>Month:</label>
             <select
               id={`${idPrefix}-month`}
               value={currentMonth}
@@ -98,7 +95,7 @@ const Datepicker = ({ idPrefix }) => {
                 </option>
               ))}
             </select>
-            <label htmlFor={`${idPrefix}-year`}>Year:</label>{' '}
+            <label htmlFor={`${idPrefix}-year`}>Year:</label>
             <select
               id={`${idPrefix}-year`}
               value={currentYear}

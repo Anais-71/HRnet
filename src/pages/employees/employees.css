@@ -1,0 +1,21 @@
+.main {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 91%;
+  margin-left: 5%;
+  padding: 24px 21px 31px 21px;
+  border-radius: 35px;
+  box-shadow: 10px 20px 27px 0px rgba(0, 0, 0, 0.29);
+}
+.main__header {
+  display: flex;
+  align-items: flex-start;
+  gap: 35px;
+}
+.main__header--title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #444444;
+  margin-bottom: 20px;
+}/*# sourceMappingURL=employees.css.map */

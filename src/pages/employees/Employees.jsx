@@ -1,32 +1,38 @@
 import React from 'react'
 import Table from '../../components/table/Table'
-import employeeList from './employee-list'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faAddressBook } from '@fortawesome/free-solid-svg-icons'
+import { useEmployeeContext } from './EmployeesContext'
 
 function Employees() {
+  const { employees } = useEmployeeContext() // Utilise le contexte pour récupérer les employés
+
+  // Définir les colonnes pour le tableau
   const columns = React.useMemo(
     () => [
       { Header: 'First Name', accessor: 'firstName' },
       { Header: 'Last Name', accessor: 'lastName' },
-      { Header: 'Start Date', accessor: 'startDate' },
-      { Header: 'Department', accessor: 'department' },
       { Header: 'Date of Birth', accessor: 'dateOfBirth' },
       { Header: 'Street', accessor: 'street' },
       { Header: 'City', accessor: 'city' },
       { Header: 'State', accessor: 'state' },
       { Header: 'Zip Code', accessor: 'zipCode' },
+      { Header: 'Start Date', accessor: 'startDate' },
+      { Header: 'Department', accessor: 'department' },
     ],
     [],
   )
 
-  const data = React.useMemo(() => employeeList, [])
-
   return (
     <div className="main">
-      <h1 className="main__title">HRnet</h1>
-      <h2 className="main__subtitle">Current employees</h2>
-      <div className="main__table">
-        <Table columns={columns} data={data} />
+      <div className="main__header">
+        <div className="main__header--icon icon">
+          <FontAwesomeIcon icon={faAddressBook} className="icon__fa" />
+        </div>
+        <h2 className="main__header--title">Current employees</h2>
       </div>
+      <Table columns={columns} data={employees} />{' '}
+      {/* Passe les données du contexte au tableau */}
     </div>
   )
 }

@@ -10,9 +10,22 @@
 }
 * h1 {
   font-weight: 500;
-  color: #444444;
+  color: #5a6f07;
 }
 * h2 {
   font-weight: 500;
-  color: #444444;
+  color: #5a6f07;
+}
+* .icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #93ad18;
+  width: 46px;
+  height: 46px;
+  border-radius: 5px;
+}
+* .icon__fa {
+  color: #5a6f07;
+  height: 25px;
 }/*# sourceMappingURL=style.css.map */

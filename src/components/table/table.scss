@@ -1,34 +1,100 @@
 @import '../../assets/style/variables';
 
-.table {
+.container {
   margin-top: 20px;
   width: '100%';
   border-collapse: collapse;
-
+}
+.header {
   &__controls {
     display: flex;
     justify-content: space-between;
-  }
+    &--search {
+      &--input {
+        position: absolute;
+        width: 19%;
+        height: 40px;
+        border-radius: 5px;
+        border: solid $background;
+        background-color: $background;
+        color: $dark-gey;
+        font-weight: $light;
+        margin-left: -10px;
+        padding-left: 30px;
+      }
 
-  &__head {
-    height: 35px;
-    font-weight: $light;
+      &--icon {
+        position: relative;
+        color: $dark;
+        top: 10px;
+        left: 15px;
+        z-index: 100;
+      }
+    }
+    &--pages {
+      display: flex;
+      align-items: center;
+      color: $dark-gey;
+      font-weight: $light;
+
+      &--select {
+        margin: 0px 5px 0px 5px;
+        height: 40px;
+        border-radius: 5px;
+        border: solid $background;
+        background-color: $background;
+        color: $dark-gey;
+        font-weight: $light;
+      }
+    }
+  }
+}
+
+.table {
+  width: 100%;
+  &__header {
     text-align: left;
-    background-color: $background;
-  }
 
+    height: 43px;
+    &--row {
+      padding-left: 10px;
+      font-weight: $bold;
+    }
+  }
   &__col {
     width: 120px;
     text-align: left;
     padding-left: 10px;
-    color: $darkest;
+    font-weight: $regular;
   }
 
   &__row {
-    height: 35px;
+    height: 43px;
   }
 
-  &__btn {
-    width: 20px;
+  &__row:nth-child(even) {
+    background-color: $background;
+    color: $dark-gey;
   }
+
+  &__footer {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+    &--entries {
+      font-weight: $light;
+      font-size: 0.75rem;
+    }
+    &--pagination {
+      &--btn {
+        width: 20px;
+        background-color: white;
+      }
+    }
+  }
+}
+
+.sort-icon {
+  padding: 15px;
+  line-height: 50%;
 }
