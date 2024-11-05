@@ -1,12 +1,15 @@
 import React, { useState } from 'react'
 import { states } from './states'
 import { department } from './department'
+import { useNavigate } from 'react-router-dom'
 import './home.css'
 
 // Components
 import Datepicker from '../../components/datepicker/Datepicker'
 import Select from '../../components/select/Select'
 import Modal from '../../components/modal/Modal'
+
+// Context
 import { useEmployeeContext } from '../employees/EmployeesContext'
 
 // Icons
@@ -18,8 +21,16 @@ import {
   faBriefcase,
 } from '@fortawesome/free-solid-svg-icons'
 
+/**
+ * Home component for creating a new employee.
+ *
+ * This component includes a form to input employee details and displays a modal upon successful creation of an employee.
+ *
+ * @returns {JSX.Element} The rendered Home component.
+ */
 const Home = () => {
-  const { employees, setEmployees } = useEmployeeContext()
+  const { setEmployees } = useEmployeeContext()
+  const navigate = useNavigate()
 
   const [employeeData, setEmployeeData] = useState({
     firstName: '',
@@ -33,6 +44,13 @@ const Home = () => {
     startDate: '',
   })
 
+  const [isModalOpen, setIsModalOpen] = useState(false)
+
+  /**
+   * Handles input changes in the form fields.
+   *
+   * @param {React.ChangeEvent<HTMLInputElement>} e - The event triggered by the input change.
+   */
   const handleChange = (e) => {
     const { name, value } = e.target
     setEmployeeData((prevData) => ({
@@ -41,26 +59,47 @@ const Home = () => {
     }))
   }
 
+  /**
+   * Saves the employee data and opens a confirmation modal.
+   */
   const saveEmployee = () => {
     const newEmployee = { ...employeeData }
 
-    // Mettre à jour la liste des employés
-    setEmployees(newEmployee) < // Enregistre le nouvel employé dans le contexte
-      //ouvrir le modal
-      Modal >
-      // Réinitialiser le formulaire après l'enregistrement
-      setEmployeeData({
-        firstName: '',
-        lastName: '',
-        street: '',
-        city: '',
-        state: '',
-        zipCode: '',
-        department: '',
-        dateOfBirth: '',
-        startDate: '',
-      })
+    // Update the employees list in the context
+    setEmployees(newEmployee)
+
+    // Reset the form after saving
+    setEmployeeData({
+      firstName: '',
+      lastName: '',
+      street: '',
+      city: '',
+      state: '',
+      zipCode: '',
+      department: '',
+      dateOfBirth: '',
+      startDate: '',
+    })
+
+    // Open the modal
+    setIsModalOpen(true)
   }
+
+  const modalActions = [
+    {
+      label: 'View all employees',
+      onClick: () => {
+        navigate('/employees')
+        setIsModalOpen(false)
+      },
+    },
+    {
+      label: 'Create new employee',
+      onClick: () => {
+        setIsModalOpen(false)
+      },
+    },
+  ]
 
   return (
     <div className="main">
@@ -173,7 +212,10 @@ const Home = () => {
           <Datepicker
             idPrefix="start-date"
             onChange={(date) =>
-              setEmployeeData((prevData) => ({ ...prevData, startDate: date }))
+              setEmployeeData((prevData) => ({
+                ...prevData,
+                startDate: date,
+              }))
             }
           />
           <Select
@@ -193,6 +235,14 @@ const Home = () => {
         </div>
       </form>
       <button onClick={saveEmployee}>Save</button>
+
+      {isModalOpen && (
+        <Modal
+          onClose={() => setIsModalOpen(false)}
+          message="Employee successfully created!"
+          actions={modalActions}
+        />
+      )}
     </div>
   )
 }

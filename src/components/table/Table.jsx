@@ -7,12 +7,25 @@ import {
   faSortDown,
 } from '@fortawesome/free-solid-svg-icons'
 
+/**
+ * Table component for displaying data with search, sort, and pagination functionality.
+ *
+ * @param {Object} props - The component props.
+ * @param {Array} props.columns - The column configuration for the table.
+ * @param {Array} props.data - The data to be displayed in the table.
+ * @returns {JSX.Element} The rendered Table component.
+ */
 const Table = ({ columns, data }) => {
   const [searchTerm, setSearchTerm] = useState('')
   const [sortConfig, setSortConfig] = useState({ key: null, direction: 'asc' })
   const [entriesPerPage, setEntriesPerPage] = useState(10)
   const [currentPage, setCurrentPage] = useState(1)
 
+  /**
+   * Sorts the data based on the current sort configuration.
+   *
+   * @type {Array}
+   */
   const sortedData = useMemo(() => {
     let sorted = [...data]
     if (sortConfig.key) {
@@ -35,17 +48,32 @@ const Table = ({ columns, data }) => {
     return sorted
   }, [data, sortConfig])
 
+  /**
+   * Filters the sorted data based on the search term.
+   *
+   * @type {Array}
+   */
   const filteredData = sortedData.filter((item) =>
     Object.values(item).some((value) =>
       value.toString().toLowerCase().includes(searchTerm.toLowerCase()),
     ),
   )
 
+  /**
+   * Gets the data to be displayed on the current page.
+   *
+   * @type {Array}
+   */
   const displayedData = filteredData.slice(
     (currentPage - 1) * entriesPerPage,
     currentPage * entriesPerPage,
   )
 
+  /**
+   * Handles sorting when a column header is clicked.
+   *
+   * @param {string} key - The key of the column to sort by.
+   */
   const handleSort = (key) => {
     setSortConfig((prev) => ({
       key,
@@ -53,11 +81,21 @@ const Table = ({ columns, data }) => {
     }))
   }
 
+  /**
+   * Handles changes to the search input.
+   *
+   * @param {React.ChangeEvent<HTMLInputElement>} e - The event triggered by the input change.
+   */
   const handleSearch = (e) => {
     setSearchTerm(e.target.value)
     setCurrentPage(1)
   }
 
+  /**
+   * Handles changes to the number of entries displayed per page.
+   *
+   * @param {React.ChangeEvent<HTMLSelectElement>} e - The event triggered by the select change.
+   */
   const handleEntriesPerPage = (e) => {
     setEntriesPerPage(Number(e.target.value))
     setCurrentPage(1)
