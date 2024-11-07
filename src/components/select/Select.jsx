@@ -33,7 +33,7 @@ const Select = ({
         onChange={onChange}
         name={name}
       >
-        <option value="">Please select</option>
+        <option value="" className="select__placeholder"></option>
         {options.map((option) => (
           <option
             className="select__option"

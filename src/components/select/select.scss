@@ -7,4 +7,9 @@
   border: none;
   border-radius: 5px;
   color: $darkest;
+
+  &__placeholder {
+    font-weight: $light;
+    font-size: 0.9rem;
+  }
 }

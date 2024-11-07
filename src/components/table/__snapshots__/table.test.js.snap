@@ -1,0 +1,226 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Table matches the snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="container"
+  >
+    <div
+      class="header__controls"
+    >
+      <div
+        class="header__controls--search"
+        data-testid="search-input-container"
+      >
+        <svg
+          aria-hidden="true"
+          class="svg-inline--fa fa-magnifying-glass header__controls--search--icon"
+          data-icon="magnifying-glass"
+          data-prefix="fas"
+          focusable="false"
+          role="img"
+          viewBox="0 0 512 512"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z"
+            fill="currentColor"
+          />
+        </svg>
+        <input
+          class="header__controls--search--input"
+          data-testid="search-input"
+          placeholder="Search..."
+          type="text"
+          value=""
+        />
+      </div>
+      <div
+        class="header__controls--pages"
+      >
+        Show
+        <select
+          class="header__controls--pages--select"
+          data-testid="entries-per-page-select"
+        >
+          <option
+            value="10"
+          >
+            10
+          </option>
+          <option
+            value="25"
+          >
+            25
+          </option>
+          <option
+            value="50"
+          >
+            50
+          </option>
+          <option
+            value="100"
+          >
+            100
+          </option>
+        </select>
+        entries
+      </div>
+    </div>
+    <table
+      class="table"
+    >
+      <thead
+        class="table__header"
+      >
+        <tr>
+          <th
+            class="table__header--row"
+            data-testid="sort-column-name"
+          >
+            Name
+          </th>
+        </tr>
+      </thead>
+      <tbody
+        class="table__content"
+      >
+        <tr
+          class="table__row"
+          data-testid="table-row"
+        >
+          <td
+            class="table__col"
+          >
+            Alice
+          </td>
+        </tr>
+        <tr
+          class="table__row"
+          data-testid="table-row"
+        >
+          <td
+            class="table__col"
+          >
+            Bob
+          </td>
+        </tr>
+        <tr
+          class="table__row"
+          data-testid="table-row"
+        >
+          <td
+            class="table__col"
+          >
+            Charlie
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <div
+      class="table__footer"
+    >
+      <p
+        class="table__footer--entries"
+      >
+        Showing 1 to 3 of 3 entries
+      </p>
+      <div
+        class="table__footer--pagination"
+        data-testid="pagination-buttons"
+      >
+        <button
+          class="table__footer--pagination--btn"
+          data-testid="first-page-btn"
+          disabled=""
+        >
+          <svg
+            aria-hidden="true"
+            class="svg-inline--fa fa-backward-step "
+            data-icon="backward-step"
+            data-prefix="fas"
+            focusable="false"
+            role="img"
+            viewBox="0 0 320 512"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M267.5 440.6c9.5 7.9 22.8 9.7 34.1 4.4s18.4-16.6 18.4-29l0-320c0-12.4-7.2-23.7-18.4-29s-24.5-3.6-34.1 4.4l-192 160L64 241 64 96c0-17.7-14.3-32-32-32S0 78.3 0 96L0 416c0 17.7 14.3 32 32 32s32-14.3 32-32l0-145 11.5 9.6 192 160z"
+              fill="currentColor"
+            />
+          </svg>
+        </button>
+        <button
+          class="table__footer--pagination--btn"
+          data-testid="prev-page-btn"
+          disabled=""
+        >
+          <svg
+            aria-hidden="true"
+            class="svg-inline--fa fa-chevron-left "
+            data-icon="chevron-left"
+            data-prefix="fas"
+            focusable="false"
+            role="img"
+            viewBox="0 0 320 512"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l192 192c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L77.3 256 246.6 86.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-192 192z"
+              fill="currentColor"
+            />
+          </svg>
+        </button>
+        <button
+          class="table__footer--pagination--btn active"
+          data-testid="page-btn-1"
+        >
+          1
+        </button>
+        <button
+          class="table__footer--pagination--btn"
+          data-testid="next-page-btn"
+          disabled=""
+        >
+          <svg
+            aria-hidden="true"
+            class="svg-inline--fa fa-chevron-right "
+            data-icon="chevron-right"
+            data-prefix="fas"
+            focusable="false"
+            role="img"
+            viewBox="0 0 320 512"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M310.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-192 192c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L242.7 256 73.4 86.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l192 192z"
+              fill="currentColor"
+            />
+          </svg>
+        </button>
+        <button
+          class="table__footer--pagination--btn"
+          data-testid="last-page-btn"
+          disabled=""
+        >
+          <svg
+            aria-hidden="true"
+            class="svg-inline--fa fa-forward-step "
+            data-icon="forward-step"
+            data-prefix="fas"
+            focusable="false"
+            role="img"
+            viewBox="0 0 320 512"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M52.5 440.6c-9.5 7.9-22.8 9.7-34.1 4.4S0 428.4 0 416L0 96C0 83.6 7.2 72.3 18.4 67s24.5-3.6 34.1 4.4l192 160L256 241l0-145c0-17.7 14.3-32 32-32s32 14.3 32 32l0 320c0 17.7-14.3 32-32 32s-32-14.3-32-32l0-145-11.5 9.6-192 160z"
+              fill="currentColor"
+            />
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;

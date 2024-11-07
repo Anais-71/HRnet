@@ -81,14 +81,14 @@
     display: flex;
     justify-content: space-between;
     margin-top: 20px;
-    &--entries {
-      font-weight: $light;
-      font-size: 0.75rem;
-    }
+    font-weight: $light;
+    font-size: 0.75rem;
     &--pagination {
       &--btn {
-        width: 20px;
+        padding-left: 5px;
         background-color: white;
+        color: $dark-gey;
+        border: none;
       }
     }
   }

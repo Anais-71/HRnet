@@ -16,10 +16,9 @@ exports[`Select Component Select component matches snapshot 1`] = `
       name="test-select-snapshot"
     >
       <option
+        class="select__placeholder"
         value=""
-      >
-        Please select
-      </option>
+      />
       <option
         class="select__option"
         value="1"

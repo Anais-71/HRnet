@@ -139,12 +139,13 @@ const Home = () => {
           <label htmlFor="date-of-birth">Date of Birth</label>
           <Datepicker
             idPrefix="date-of-birth"
-            onChange={(date) =>
+            onChange={(date) => {
+              console.log('Date reçue dans Home :', date)
               setEmployeeData((prevData) => ({
                 ...prevData,
                 dateOfBirth: date,
               }))
-            }
+            }}
           />
         </div>
 
@@ -211,13 +212,15 @@ const Home = () => {
           <label htmlFor="start-date">Start Date</label>
           <Datepicker
             idPrefix="start-date"
-            onChange={(date) =>
+            onChange={(date) => {
+              console.log('Date reçue dans Home :', date)
               setEmployeeData((prevData) => ({
                 ...prevData,
                 startDate: date,
               }))
-            }
+            }}
           />
+
           <Select
             options={department}
             label="Department"
@@ -234,7 +237,9 @@ const Home = () => {
           />
         </div>
       </form>
-      <button onClick={saveEmployee}>Save</button>
+      <button className="main__form__btn" onClick={saveEmployee}>
+        Save
+      </button>
 
       {isModalOpen && (
         <Modal

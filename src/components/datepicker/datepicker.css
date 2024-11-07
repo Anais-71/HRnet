@@ -1,15 +1,31 @@
 .datepicker {
   color: #4c4c4c;
+  position: relative;
+}
+.datepicker__input {
+  width: 107% !important;
+}
+.datepicker__input::-moz-placeholder {
+  font-weight: 100;
+  font-size: 0.9rem;
+}
+.datepicker__input::placeholder {
+  font-weight: 100;
+  font-size: 0.9rem;
 }
 .datepicker__calendar {
+  width: -moz-fit-content;
   width: fit-content;
   margin-bottom: 20px;
   padding: 12px;
   border: solid 1px #e7ebdc;
-  background-color: rgba(231, 237, 188, 0.23);
+  background-color: rgb(231, 237, 188);
   border-radius: 5px;
   display: flex;
   flex-direction: column;
+  position: absolute;
+  top: 0px;
+  left: 0px;
 }
 .datepicker__grid {
   display: grid;

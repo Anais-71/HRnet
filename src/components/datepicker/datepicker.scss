@@ -2,16 +2,28 @@
 
 .datepicker {
   color: $dark-gey;
+  position: relative;
+
+  &__input {
+    width: 107% !important;
+  }
+  &__input::placeholder {
+    font-weight: $light;
+    font-size: 0.9rem;
+  }
 
   &__calendar {
     width: fit-content;
     margin-bottom: 20px;
     padding: 12px;
     border: solid 1px $background;
-    background-color: rgba(231, 237, 188, 0.23);
+    background-color: rgba(231, 237, 188, 1.5);
     border-radius: 5px;
     display: flex;
     flex-direction: column;
+    position: absolute;
+    top: 0px;
+    left: 0px;
   }
 
   &__grid {

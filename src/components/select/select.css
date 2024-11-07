@@ -5,4 +5,8 @@
   border: none;
   border-radius: 5px;
   color: #444444;
+}
+.select__placeholder {
+  font-weight: 100;
+  font-size: 0.9rem;
 }/*# sourceMappingURL=select.css.map */

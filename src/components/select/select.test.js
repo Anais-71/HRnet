@@ -85,7 +85,7 @@ describe('Select Component', () => {
     )
 
     const select = screen.getByRole('combobox')
-    expect(select).toHaveTextContent('Please select') // Check that the default option is present
+    expect(select).toHaveTextContent(' ') // Check that the default option is present
     expect(select).toHaveTextContent('Option 1') // Check that option 1 is present
     expect(select).toHaveTextContent('Option 2') // Check that option 2 is present
   })

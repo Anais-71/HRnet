@@ -5,27 +5,18 @@ import {
   faSearch,
   faSortUp,
   faSortDown,
+  faBackwardStep,
+  faForwardStep,
+  faChevronRight,
+  faChevronLeft,
 } from '@fortawesome/free-solid-svg-icons'
 
-/**
- * Table component for displaying data with search, sort, and pagination functionality.
- *
- * @param {Object} props - The component props.
- * @param {Array} props.columns - The column configuration for the table.
- * @param {Array} props.data - The data to be displayed in the table.
- * @returns {JSX.Element} The rendered Table component.
- */
 const Table = ({ columns, data }) => {
   const [searchTerm, setSearchTerm] = useState('')
   const [sortConfig, setSortConfig] = useState({ key: null, direction: 'asc' })
   const [entriesPerPage, setEntriesPerPage] = useState(10)
   const [currentPage, setCurrentPage] = useState(1)
 
-  /**
-   * Sorts the data based on the current sort configuration.
-   *
-   * @type {Array}
-   */
   const sortedData = useMemo(() => {
     let sorted = [...data]
     if (sortConfig.key) {
@@ -48,32 +39,22 @@ const Table = ({ columns, data }) => {
     return sorted
   }, [data, sortConfig])
 
-  /**
-   * Filters the sorted data based on the search term.
-   *
-   * @type {Array}
-   */
-  const filteredData = sortedData.filter((item) =>
-    Object.values(item).some((value) =>
-      value.toString().toLowerCase().includes(searchTerm.toLowerCase()),
-    ),
-  )
+  const filteredData = useMemo(() => {
+    return sortedData.filter((item) =>
+      Object.values(item).some((value) =>
+        value.toString().toLowerCase().includes(searchTerm.toLowerCase()),
+      ),
+    )
+  }, [sortedData, searchTerm])
 
-  /**
-   * Gets the data to be displayed on the current page.
-   *
-   * @type {Array}
-   */
   const displayedData = filteredData.slice(
     (currentPage - 1) * entriesPerPage,
     currentPage * entriesPerPage,
   )
 
-  /**
-   * Handles sorting when a column header is clicked.
-   *
-   * @param {string} key - The key of the column to sort by.
-   */
+  const totalEntries = filteredData.length
+  const totalPages = Math.ceil(totalEntries / entriesPerPage)
+
   const handleSort = (key) => {
     setSortConfig((prev) => ({
       key,
@@ -81,34 +62,32 @@ const Table = ({ columns, data }) => {
     }))
   }
 
-  /**
-   * Handles changes to the search input.
-   *
-   * @param {React.ChangeEvent<HTMLInputElement>} e - The event triggered by the input change.
-   */
   const handleSearch = (e) => {
     setSearchTerm(e.target.value)
     setCurrentPage(1)
   }
 
-  /**
-   * Handles changes to the number of entries displayed per page.
-   *
-   * @param {React.ChangeEvent<HTMLSelectElement>} e - The event triggered by the select change.
-   */
   const handleEntriesPerPage = (e) => {
     setEntriesPerPage(Number(e.target.value))
     setCurrentPage(1)
   }
 
-  const totalEntries = filteredData.length
+  const changePage = (page) => {
+    if (page >= 1 && page <= totalPages) {
+      setCurrentPage(page)
+    }
+  }
+
   const startEntry = (currentPage - 1) * entriesPerPage + 1
   const endEntry = Math.min(currentPage * entriesPerPage, totalEntries)
 
   return (
     <div className="container">
       <div className="header__controls">
-        <div className="header__controls--search">
+        <div
+          className="header__controls--search"
+          data-testid="search-input-container"
+        >
           <FontAwesomeIcon
             icon={faSearch}
             className="header__controls--search--icon"
@@ -119,6 +98,7 @@ const Table = ({ columns, data }) => {
             value={searchTerm}
             onChange={handleSearch}
             className="header__controls--search--input"
+            data-testid="search-input"
           />
         </div>
         <div className="header__controls--pages">
@@ -127,6 +107,7 @@ const Table = ({ columns, data }) => {
             value={entriesPerPage}
             onChange={handleEntriesPerPage}
             className="header__controls--pages--select"
+            data-testid="entries-per-page-select"
           >
             {[10, 25, 50, 100].map((size) => (
               <option key={size} value={size}>
@@ -146,6 +127,7 @@ const Table = ({ columns, data }) => {
                 className="table__header--row"
                 key={column.accessor}
                 onClick={() => handleSort(column.accessor)}
+                data-testid={`sort-column-${column.accessor}`}
               >
                 {column.Header}
                 {sortConfig.key === column.accessor && (
@@ -163,7 +145,7 @@ const Table = ({ columns, data }) => {
         </thead>
         <tbody className="table__content">
           {displayedData.map((item, index) => (
-            <tr className="table__row" key={index}>
+            <tr className="table__row" key={index} data-testid="table-row">
               {columns.map((column) => (
                 <td className="table__col" key={column.accessor}>
                   {item[column.accessor]}
@@ -179,55 +161,55 @@ const Table = ({ columns, data }) => {
           Showing {startEntry} to {endEntry} of {totalEntries} entries
         </p>
 
-        <div className="table__footer--pagination">
+        <div
+          className="table__footer--pagination"
+          data-testid="pagination-buttons"
+        >
           <button
             className="table__footer--pagination--btn"
-            onClick={() => setCurrentPage(1)}
+            onClick={() => changePage(1)}
             disabled={currentPage === 1}
+            data-testid="first-page-btn"
           >
-            First
+            <FontAwesomeIcon icon={faBackwardStep} />
           </button>
           <button
             className="table__footer--pagination--btn"
-            onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
+            onClick={() => changePage(currentPage - 1)}
             disabled={currentPage === 1}
+            data-testid="prev-page-btn"
           >
-            Previous
+            <FontAwesomeIcon icon={faChevronLeft} />
           </button>
 
-          {[...Array(Math.ceil(totalEntries / entriesPerPage)).keys()].map(
-            (num) => (
-              <button
-                key={num + 1}
-                onClick={() => setCurrentPage(num + 1)}
-                className={`table__footer--pagination--btn ${
-                  currentPage === num + 1 ? 'active' : ''
-                }`}
-              >
-                {num + 1}
-              </button>
-            ),
-          )}
+          {[...Array(totalPages)].map((_, index) => (
+            <button
+              key={index + 1}
+              onClick={() => changePage(index + 1)}
+              className={`table__footer--pagination--btn ${
+                currentPage === index + 1 ? 'active' : ''
+              }`}
+              data-testid={`page-btn-${index + 1}`}
+            >
+              {index + 1}
+            </button>
+          ))}
 
           <button
             className="table__footer--pagination--btn"
-            onClick={() =>
-              setCurrentPage((prev) =>
-                Math.min(prev + 1, Math.ceil(totalEntries / entriesPerPage)),
-              )
-            }
-            disabled={currentPage === Math.ceil(totalEntries / entriesPerPage)}
+            onClick={() => changePage(currentPage + 1)}
+            disabled={currentPage === totalPages}
+            data-testid="next-page-btn"
           >
-            Next
+            <FontAwesomeIcon icon={faChevronRight} />
           </button>
           <button
             className="table__footer--pagination--btn"
-            onClick={() =>
-              setCurrentPage(Math.ceil(totalEntries / entriesPerPage))
-            }
-            disabled={currentPage === Math.ceil(totalEntries / entriesPerPage)}
+            onClick={() => changePage(totalPages)}
+            disabled={currentPage === totalPages}
+            data-testid="last-page-btn"
           >
-            Last
+            <FontAwesomeIcon icon={faForwardStep} />
           </button>
         </div>
       </div>
