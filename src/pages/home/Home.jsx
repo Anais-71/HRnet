@@ -44,13 +44,20 @@ const Home = () => {
     startDate: '',
   })
 
+  const [errors, setErrors] = useState({}) // Store errors
   const [isModalOpen, setIsModalOpen] = useState(false)
 
-  /**
-   * Handles input changes in the form fields.
-   *
-   * @param {React.ChangeEvent<HTMLInputElement>} e - The event triggered by the input change.
-   */
+  // Validate the form
+  const validateForm = () => {
+    const newErrors = {}
+    Object.keys(employeeData).forEach((key) => {
+      if (!employeeData[key]) {
+        newErrors[key] = 'This field is required'
+      }
+    })
+    return newErrors
+  }
+
   const handleChange = (e) => {
     const { name, value } = e.target
     setEmployeeData((prevData) => ({
@@ -59,30 +66,28 @@ const Home = () => {
     }))
   }
 
-  /**
-   * Saves the employee data and opens a confirmation modal.
-   */
   const saveEmployee = () => {
-    const newEmployee = { ...employeeData }
+    const validationErrors = validateForm()
+    setErrors(validationErrors)
 
-    // Update the employees list in the context
-    setEmployees(newEmployee)
+    if (Object.keys(validationErrors).length === 0) {
+      const newEmployee = { ...employeeData }
+      setEmployees(newEmployee)
 
-    // Reset the form after saving
-    setEmployeeData({
-      firstName: '',
-      lastName: '',
-      street: '',
-      city: '',
-      state: '',
-      zipCode: '',
-      department: '',
-      dateOfBirth: '',
-      startDate: '',
-    })
+      setEmployeeData({
+        firstName: '',
+        lastName: '',
+        street: '',
+        city: '',
+        state: '',
+        zipCode: '',
+        department: '',
+        dateOfBirth: '',
+        startDate: '',
+      })
 
-    // Open the modal
-    setIsModalOpen(true)
+      setIsModalOpen(true)
+    }
   }
 
   const modalActions = [
@@ -127,6 +132,10 @@ const Home = () => {
             onChange={handleChange}
             autoComplete="given-name"
           />
+          {errors.firstName && (
+            <div className="main__form__error">{errors.firstName}</div>
+          )}
+
           <label htmlFor="last-name">Last Name</label>
           <input
             type="text"
@@ -136,17 +145,23 @@ const Home = () => {
             onChange={handleChange}
             autoComplete="family-name"
           />
+          {errors.lastName && (
+            <div className="main__form__error">{errors.lastName}</div>
+          )}
+
           <label htmlFor="date-of-birth">Date of Birth</label>
           <Datepicker
             idPrefix="date-of-birth"
             onChange={(date) => {
-              console.log('Date reçue dans Home :', date)
               setEmployeeData((prevData) => ({
                 ...prevData,
                 dateOfBirth: date,
               }))
             }}
           />
+          {errors.dateOfBirth && (
+            <div className="main__form__error">{errors.dateOfBirth}</div>
+          )}
         </div>
 
         <div className="form__section">
@@ -165,6 +180,9 @@ const Home = () => {
             onChange={handleChange}
             autoComplete="street-address"
           />
+          {errors.street && (
+            <div className="main__form__error">{errors.street}</div>
+          )}
 
           <label htmlFor="city">City</label>
           <input
@@ -175,6 +193,9 @@ const Home = () => {
             onChange={handleChange}
             autoComplete="address-level2"
           />
+          {errors.city && (
+            <div className="main__form__error">{errors.city}</div>
+          )}
 
           <Select
             options={states}
@@ -190,6 +211,9 @@ const Home = () => {
             valueField="abbreviation"
             labelField="name"
           />
+          {errors.state && (
+            <div className="main__form__error">{errors.state}</div>
+          )}
 
           <label htmlFor="zip-code">Zip Code</label>
           <input
@@ -200,6 +224,9 @@ const Home = () => {
             onChange={handleChange}
             autoComplete="postal-code"
           />
+          {errors.zipCode && (
+            <div className="main__form__error">{errors.zipCode}</div>
+          )}
         </div>
 
         <div className="form__section">
@@ -213,13 +240,15 @@ const Home = () => {
           <Datepicker
             idPrefix="start-date"
             onChange={(date) => {
-              console.log('Date reçue dans Home :', date)
               setEmployeeData((prevData) => ({
                 ...prevData,
                 startDate: date,
               }))
             }}
           />
+          {errors.startDate && (
+            <div className="main__form__error">{errors.startDate}</div>
+          )}
 
           <Select
             options={department}
@@ -235,6 +264,9 @@ const Home = () => {
             valueField="name"
             labelField="name"
           />
+          {errors.department && (
+            <div className="main__form__error">{errors.department}</div>
+          )}
         </div>
       </form>
       <button className="main__form__btn" onClick={saveEmployee}>

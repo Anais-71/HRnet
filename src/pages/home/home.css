@@ -85,6 +85,14 @@
 .main__form__btn:hover {
   background-color: #333f04;
 }
+.main__form__error {
+  font-weight: 100;
+  font-size: 0.75rem;
+  color: red;
+  position: absolute;
+  margin-left: 125px;
+  margin-top: -25px;
+}
 .main .datepicker {
   display: inline-block;
   width: 60%;
