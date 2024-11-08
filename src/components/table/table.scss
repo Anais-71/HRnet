@@ -51,6 +51,7 @@
 }
 
 .table {
+  border-collapse: collapse;
   width: 100%;
   &__header {
     text-align: left;
@@ -75,6 +76,14 @@
   &__row:nth-child(even) {
     background-color: $background;
     color: $dark-gey;
+  }
+
+  &__seeUser {
+    border: none;
+    background-color: transparent;
+    font-size: 1rem;
+    font-weight: $regular;
+    text-decoration: underline;
   }
 
   &__footer {

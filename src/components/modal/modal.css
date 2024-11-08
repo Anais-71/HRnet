@@ -26,6 +26,8 @@
   position: absolute;
   top: 25px;
   right: 25px;
+  border: none;
+  background-color: white;
 }
 .modal__popup--close--icon {
   width: 31px;
@@ -61,4 +63,23 @@
 }
 .modal__popup--buttons--btn:hover {
   background-color: #333f04;
+}
+@media (max-width: 719px) {
+  .modal__popup {
+    height: 400px;
+  }
+  .modal__popup--message {
+    font-size: 1.5rem;
+    text-align: center;
+  }
+  .modal__popup--buttons {
+    flex-direction: column;
+    align-items: center;
+    gap: 25px;
+    margin-top: 55px;
+  }
+  .modal__popup--buttons--btn {
+    width: 200px;
+    margin: 0px;
+  }
 }/*# sourceMappingURL=modal.css.map */

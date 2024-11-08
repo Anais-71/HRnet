@@ -110,4 +110,19 @@
     display: inline-block;
     width: 60%;
   }
+
+  //Mobile version
+  @media (max-width: 719px) {
+    width: 90%;
+    overflow: hidden;
+
+    &__form {
+      flex-direction: column;
+      width: 310%;
+
+      &__error {
+        margin-left: 90px;
+      }
+    }
+  }
 }

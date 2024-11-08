@@ -24,4 +24,18 @@
   font-weight: 300;
   text-align: right;
   padding-right: 10px;
+}
+@media (max-width: 720px) {
+  .header {
+    align-items: start;
+  }
+  .header__main {
+    flex-direction: column;
+  }
+  .header__nav {
+    padding-top: 24px;
+    flex-direction: column;
+    justify-content: end;
+    gap: 12px;
+  }
 }/*# sourceMappingURL=header.css.map */

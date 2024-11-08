@@ -44,6 +44,7 @@
 }
 
 .table {
+  border-collapse: collapse;
   width: 100%;
 }
 .table__header {
@@ -66,6 +67,13 @@
 .table__row:nth-child(even) {
   background-color: #e7ebdc;
   color: #4c4c4c;
+}
+.table__seeUser {
+  border: none;
+  background-color: transparent;
+  font-size: 1rem;
+  font-weight: 300;
+  text-decoration: underline;
 }
 .table__footer {
   display: flex;

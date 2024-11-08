@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react'
+import React, { useState, useMemo, useEffect } from 'react'
 import './table.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
@@ -11,11 +11,21 @@ import {
   faChevronLeft,
 } from '@fortawesome/free-solid-svg-icons'
 
+import User from '../user/User'
+
 const Table = ({ columns, data }) => {
   const [searchTerm, setSearchTerm] = useState('')
   const [sortConfig, setSortConfig] = useState({ key: null, direction: 'asc' })
   const [entriesPerPage, setEntriesPerPage] = useState(10)
   const [currentPage, setCurrentPage] = useState(1)
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth)
+  const [selectedUser, setSelectedUser] = useState(null)
+
+  useEffect(() => {
+    const handleResize = () => setWindowWidth(window.innerWidth)
+    window.addEventListener('resize', handleResize)
+    return () => window.removeEventListener('resize', handleResize)
+  }, [])
 
   const sortedData = useMemo(() => {
     let sorted = [...data]
@@ -23,7 +33,6 @@ const Table = ({ columns, data }) => {
       sorted.sort((a, b) => {
         const aValue = a[sortConfig.key]
         const bValue = b[sortConfig.key]
-
         if (typeof aValue === 'string' && typeof bValue === 'string') {
           return sortConfig.direction === 'asc'
             ? aValue.localeCompare(bValue)
@@ -81,6 +90,10 @@ const Table = ({ columns, data }) => {
   const startEntry = (currentPage - 1) * entriesPerPage + 1
   const endEntry = Math.min(currentPage * entriesPerPage, totalEntries)
 
+  const handleUserClick = (user) => {
+    setSelectedUser(user)
+  }
+
   return (
     <div className="container">
       <div className="header__controls">
@@ -122,35 +135,58 @@ const Table = ({ columns, data }) => {
       <table className="table">
         <thead className="table__header">
           <tr>
-            {columns.map((column) => (
-              <th
-                className="table__header--row"
-                key={column.accessor}
-                onClick={() => handleSort(column.accessor)}
-                data-testid={`sort-column-${column.accessor}`}
-              >
-                {column.Header}
-                {sortConfig.key === column.accessor && (
-                  <span className="sort-icon">
-                    <FontAwesomeIcon
-                      icon={
-                        sortConfig.direction === 'asc' ? faSortUp : faSortDown
-                      }
-                    />
-                  </span>
-                )}
-              </th>
-            ))}
+            {windowWidth <= 820 ? (
+              <>
+                <th className="table__header--row">First Name</th>
+                <th className="table__header--row">Last Name</th>
+                <th className="table__header--row"></th>
+              </>
+            ) : (
+              columns.map((column) => (
+                <th
+                  className="table__header--row"
+                  key={column.accessor}
+                  onClick={() => handleSort(column.accessor)}
+                  data-testid={`sort-column-${column.accessor}`}
+                >
+                  {column.Header}
+                  {sortConfig.key === column.accessor && (
+                    <span className="sort-icon">
+                      <FontAwesomeIcon
+                        icon={
+                          sortConfig.direction === 'asc' ? faSortUp : faSortDown
+                        }
+                      />
+                    </span>
+                  )}
+                </th>
+              ))
+            )}
           </tr>
         </thead>
         <tbody className="table__content">
           {displayedData.map((item, index) => (
             <tr className="table__row" key={index} data-testid="table-row">
-              {columns.map((column) => (
-                <td className="table__col" key={column.accessor}>
-                  {item[column.accessor]}
-                </td>
-              ))}
+              {windowWidth <= 820 ? (
+                <>
+                  <td className="table__col">{item.firstName}</td>
+                  <td className="table__col">{item.lastName}</td>
+                  <td className="table__col">
+                    <button
+                      className="table__seeUser"
+                      onClick={() => handleUserClick(item)}
+                    >
+                      See user...
+                    </button>
+                  </td>
+                </>
+              ) : (
+                columns.map((column) => (
+                  <td className="table__col" key={column.accessor}>
+                    {item[column.accessor]}
+                  </td>
+                ))
+              )}
             </tr>
           ))}
         </tbody>
@@ -213,6 +249,10 @@ const Table = ({ columns, data }) => {
           </button>
         </div>
       </div>
+
+      {selectedUser && (
+        <User user={selectedUser} onClose={() => setSelectedUser(null)} />
+      )}
     </div>
   )
 }

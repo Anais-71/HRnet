@@ -96,4 +96,17 @@
 .main .datepicker {
   display: inline-block;
   width: 60%;
+}
+@media (max-width: 719px) {
+  .main {
+    width: 90%;
+    overflow: hidden;
+  }
+  .main__form {
+    flex-direction: column;
+    width: 310%;
+  }
+  .main__form__error {
+    margin-left: 90px;
+  }
 }/*# sourceMappingURL=home.css.map */
