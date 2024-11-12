@@ -1,0 +1,60 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Modal component matches snapshot 1`] = `
+<DocumentFragment>
+  <div
+    aria-modal="true"
+    class="modal"
+    role="dialog"
+    tabindex="-1"
+  >
+    <div
+      aria-describedby="modal-message"
+      aria-labelledby="modal-title"
+      class="modal__popup"
+    >
+      <button
+        aria-label="Close modal"
+        class="modal__popup--close"
+      >
+        <svg
+          aria-hidden="true"
+          class="svg-inline--fa fa-xmark modal__popup--close--icon"
+          data-icon="xmark"
+          data-prefix="fas"
+          focusable="false"
+          role="img"
+          viewBox="0 0 384 512"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z"
+            fill="currentColor"
+          />
+        </svg>
+      </button>
+      <h3
+        class="modal__popup--title"
+        id="modal-title"
+      >
+        Snapshot Test Modal
+      </h3>
+      <p
+        class="modal__popup--message"
+        id="modal-message"
+      >
+        Testing snapshot for the modal.
+      </p>
+      <div
+        class="modal__popup--buttons"
+      >
+        <button
+          class="modal__popup--buttons--btn"
+        >
+          OK
+        </button>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;
