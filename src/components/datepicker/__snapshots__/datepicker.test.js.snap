@@ -7,30 +7,12 @@ exports[`Datepicker component matches snapshot 1`] = `
   >
     <input
       aria-expanded="false"
-      aria-haspopup="true"
+      aria-haspopup="grid"
       autocomplete="off"
       class="datepicker__input"
       placeholder="Please select a date"
       readonly=""
-      type="text"
-      value=""
-    />
-  </div>
-</DocumentFragment>
-`;
-
-exports[`Given I use the Datepicker plugin Datepicker component matches snapshot 1`] = `
-<DocumentFragment>
-  <div
-    class="datepicker"
-  >
-    <input
-      aria-expanded="false"
-      aria-haspopup="true"
-      autocomplete="off"
-      class="datepicker__input"
-      placeholder="Please select a date"
-      readonly=""
+      tabindex="0"
       type="text"
       value=""
     />

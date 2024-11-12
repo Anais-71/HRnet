@@ -56,4 +56,8 @@
   border-radius: 5px;
   border: none;
   background-color: #e7ebdc;
+}
+.datepicker__controls select[size]:focus {
+  padding-right: 15px;
+  overflow-y: hidden;
 }/*# sourceMappingURL=datepicker.css.map */

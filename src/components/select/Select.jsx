@@ -1,19 +1,6 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import './select.css'
 
-/**
- * Select component for rendering a dropdown menu.
- *
- * @param {Object} props - The component props.
- * @param {Array} props.options - The options to be displayed in the dropdown.
- * @param {string} props.label - The label for the select element.
- * @param {string} props.value - The current value of the select element.
- * @param {function} props.onChange - The function to call when the selected option changes.
- * @param {string} props.name - The name attribute for the select element.
- * @param {string} props.valueField - The field in the options to be used as the value for the select options.
- * @param {string} props.labelField - The field in the options to be used as the label for the select options.
- * @returns {JSX.Element} The rendered Select component.
- */
 const Select = ({
   options,
   label,
@@ -23,22 +10,47 @@ const Select = ({
   valueField,
   labelField,
 }) => {
+  const selectRef = useRef(null)
+
+  const handleFocus = () => {
+    // L'élément <select> s'ouvre automatiquement lorsqu'il reçoit le focus, donc pas besoin de logique ici.
+  }
+
+  const handleBlur = () => {
+    // L'élément <select> se ferme automatiquement lorsqu'il perd le focus, donc pas besoin de logique ici non plus.
+  }
+
   return (
     <div className="select-container">
-      <label htmlFor={name}>{label}</label>
+      <label htmlFor={name} id={`${name}-label`}>
+        {label}
+      </label>
       <select
+        ref={selectRef}
         className="select"
         id={name}
         value={value}
         onChange={onChange}
         name={name}
+        onFocus={handleFocus} // Ouvre le menu lorsque l'élément reçoit le focus (comportement natif)
+        onBlur={handleBlur} // Ferme le menu lorsque l'élément perd le focus (comportement natif)
+        aria-labelledby={`${name}-label`}
+        aria-expanded="false" // Attribut ARIA pour signaler que l'état du dropdown est fermé
+        aria-controls={`${name}-options`} // Lier les options au select
       >
-        <option value="" className="select__placeholder"></option>
+        <option
+          value=""
+          className="select__placeholder"
+          aria-placeholder="true"
+        >
+          Select an option
+        </option>
         {options.map((option) => (
           <option
             className="select__option"
             key={option[valueField]}
             value={option[valueField]}
+            aria-selected={option[valueField] === value} // Attribut ARIA pour signaler l'option sélectionnée
           >
             {option[labelField]}
           </option>

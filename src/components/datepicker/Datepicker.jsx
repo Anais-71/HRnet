@@ -7,14 +7,22 @@ const Datepicker = ({ idPrefix, onChange }) => {
   const [currentMonth, setCurrentMonth] = useState(new Date().getMonth())
   const [currentYear, setCurrentYear] = useState(new Date().getFullYear())
   const inputRef = useRef(null)
+  const monthSelectRef = useRef(null)
+  const yearSelectRef = useRef(null)
+
   const daysInMonth = (month, year) => new Date(year, month + 1, 0).getDate()
 
-  // Ajout de vérifications de fonctionnement avec des logs
   const handleDayClick = (day) => {
     const formattedDate = `${day}/${currentMonth + 1}/${currentYear}`
     setSelectedDate(formattedDate)
-    if (onChange) onChange(formattedDate) // Envoie au parent
+    if (onChange) onChange(formattedDate)
     setIsOpen(false)
+  }
+
+  const handleKeyPress = (event, action) => {
+    if (event.key === 'Enter') {
+      action()
+    }
   }
 
   const renderCalendar = () => {
@@ -33,7 +41,13 @@ const Datepicker = ({ idPrefix, onChange }) => {
         <div
           key={day}
           className="datepicker__grid--day"
+          role="gridcell"
+          aria-selected={
+            selectedDate === `${day}/${currentMonth + 1}/${currentYear}`
+          }
           onClick={() => handleDayClick(day)}
+          onKeyDown={(e) => handleKeyPress(e, () => handleDayClick(day))}
+          tabIndex={0}
         >
           {day}
         </div>,
@@ -41,10 +55,14 @@ const Datepicker = ({ idPrefix, onChange }) => {
     }
 
     return (
-      <div className="datepicker__grid">
+      <div className="datepicker__grid" role="grid" aria-live="polite">
         {['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].map(
           (weekday, index) => (
-            <div key={index} className="datepicker__grid--weekday">
+            <div
+              key={index}
+              className="datepicker__grid--weekday"
+              role="columnheader"
+            >
               {weekday}
             </div>
           ),
@@ -65,24 +83,40 @@ const Datepicker = ({ idPrefix, onChange }) => {
         value={selectedDate}
         readOnly
         onClick={toggleCalendar}
+        onKeyDown={(e) => handleKeyPress(e, toggleCalendar)}
         placeholder="Please select a date"
-        aria-haspopup="true"
+        aria-haspopup="grid"
         aria-expanded={isOpen}
         autoComplete="off"
         className="datepicker__input"
+        tabIndex={0}
       />
       {isOpen && (
         <div
           className="datepicker__calendar"
           data-testid="calendar"
           style={{ position: 'absolute', top: '100%', left: 0 }}
+          role="dialog"
+          aria-modal="true"
         >
           <div className="datepicker__controls">
-            <label>Month:</label>
+            <label htmlFor={`${idPrefix}-month-select`}>Month:</label>
             <select
+              id={`${idPrefix}-month-select`}
+              ref={monthSelectRef}
               data-testid="month-select"
               value={currentMonth}
               onChange={(e) => setCurrentMonth(Number(e.target.value))}
+              aria-label="Select month"
+              onKeyDown={(e) => {
+                if (e.key === 'Enter') {
+                  e.preventDefault()
+                  monthSelectRef.current.size = 12
+                } else if (e.key === 'Escape') {
+                  monthSelectRef.current.size = 0
+                }
+              }}
+              onBlur={() => (monthSelectRef.current.size = 0)}
             >
               {[
                 'January',
@@ -104,11 +138,23 @@ const Datepicker = ({ idPrefix, onChange }) => {
               ))}
             </select>
 
-            <label>Year:</label>
+            <label htmlFor={`${idPrefix}-year-select`}>Year:</label>
             <select
+              id={`${idPrefix}-year-select`}
+              ref={yearSelectRef}
               value={currentYear}
               onChange={(e) => setCurrentYear(Number(e.target.value))}
               data-testid="year-select"
+              aria-label="Select year"
+              onKeyDown={(e) => {
+                if (e.key === 'Enter') {
+                  e.preventDefault()
+                  yearSelectRef.current.size = 5
+                } else if (e.key === 'Escape') {
+                  yearSelectRef.current.size = 0
+                }
+              }}
+              onBlur={() => (yearSelectRef.current.size = 0)}
             >
               {Array.from({ length: 76 }, (_, index) => 1950 + index).map(
                 (year) => (

@@ -79,20 +79,15 @@ describe('Given I use the Datepicker plugin', () => {
   })
 
   /**
-   * Snapshot test for the Datepicker component.
-   */
-  test('Datepicker component matches snapshot', () => {
-    const { asFragment } = render(<Datepicker />)
-    expect(asFragment()).toMatchSnapshot()
-  })
-
-  /**
    * Test to check the input field's accessibility attributes.
    */
   test('Then the input has correct accessibility attributes', () => {
     const input = screen.getByPlaceholderText(/please select a date/i)
     expect(input).toHaveAttribute('aria-expanded', 'false')
-    expect(input).toHaveAttribute('aria-haspopup', 'true')
+    expect(input).toHaveAttribute('aria-haspopup', 'grid')
+
+    fireEvent.click(input)
+    expect(input).toHaveAttribute('aria-expanded', 'true')
   })
 
   /**

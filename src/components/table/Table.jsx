@@ -104,14 +104,20 @@ const Table = ({ columns, data }) => {
           <FontAwesomeIcon
             icon={faSearch}
             className="header__controls--search--icon"
+            aria-hidden="true"
           />
+          <label htmlFor="searchInput" className="visually-hidden">
+            Search
+          </label>
           <input
             type="text"
+            id="searchInput"
             placeholder="Search..."
             value={searchTerm}
             onChange={handleSearch}
             className="header__controls--search--input"
             data-testid="search-input"
+            aria-label="Search table"
           />
         </div>
         <div className="header__controls--pages">
@@ -121,6 +127,7 @@ const Table = ({ columns, data }) => {
             onChange={handleEntriesPerPage}
             className="header__controls--pages--select"
             data-testid="entries-per-page-select"
+            aria-label="Select number of entries per page"
           >
             {[10, 25, 50, 100].map((size) => (
               <option key={size} value={size}>
@@ -132,14 +139,18 @@ const Table = ({ columns, data }) => {
         </div>
       </div>
 
-      <table className="table">
+      <table className="table" aria-live="polite">
         <thead className="table__header">
           <tr>
             {windowWidth <= 820 ? (
               <>
-                <th className="table__header--row">First Name</th>
-                <th className="table__header--row">Last Name</th>
-                <th className="table__header--row"></th>
+                <th className="table__header--row" scope="col">
+                  First Name
+                </th>
+                <th className="table__header--row" scope="col">
+                  Last Name
+                </th>
+                <th className="table__header--row" scope="col"></th>
               </>
             ) : (
               columns.map((column) => (
@@ -147,11 +158,19 @@ const Table = ({ columns, data }) => {
                   className="table__header--row"
                   key={column.accessor}
                   onClick={() => handleSort(column.accessor)}
+                  aria-sort={
+                    sortConfig.key === column.accessor
+                      ? sortConfig.direction === 'asc'
+                        ? 'ascending'
+                        : 'descending'
+                      : 'none'
+                  }
                   data-testid={`sort-column-${column.accessor}`}
+                  scope="col"
                 >
                   {column.Header}
                   {sortConfig.key === column.accessor && (
-                    <span className="sort-icon">
+                    <span className="sort-icon" aria-hidden="true">
                       <FontAwesomeIcon
                         icon={
                           sortConfig.direction === 'asc' ? faSortUp : faSortDown
@@ -175,6 +194,7 @@ const Table = ({ columns, data }) => {
                     <button
                       className="table__seeUser"
                       onClick={() => handleUserClick(item)}
+                      aria-label={`See details for ${item.firstName} ${item.lastName}`}
                     >
                       See user...
                     </button>
@@ -200,12 +220,15 @@ const Table = ({ columns, data }) => {
         <div
           className="table__footer--pagination"
           data-testid="pagination-buttons"
+          role="navigation"
+          aria-label="Pagination controls"
         >
           <button
             className="table__footer--pagination--btn"
             onClick={() => changePage(1)}
             disabled={currentPage === 1}
             data-testid="first-page-btn"
+            aria-label="Go to first page"
           >
             <FontAwesomeIcon icon={faBackwardStep} />
           </button>
@@ -214,6 +237,7 @@ const Table = ({ columns, data }) => {
             onClick={() => changePage(currentPage - 1)}
             disabled={currentPage === 1}
             data-testid="prev-page-btn"
+            aria-label="Go to previous page"
           >
             <FontAwesomeIcon icon={faChevronLeft} />
           </button>
@@ -226,6 +250,7 @@ const Table = ({ columns, data }) => {
                 currentPage === index + 1 ? 'active' : ''
               }`}
               data-testid={`page-btn-${index + 1}`}
+              aria-label={`Go to page ${index + 1}`}
             >
               {index + 1}
             </button>
@@ -236,6 +261,7 @@ const Table = ({ columns, data }) => {
             onClick={() => changePage(currentPage + 1)}
             disabled={currentPage === totalPages}
             data-testid="next-page-btn"
+            aria-label="Go to next page"
           >
             <FontAwesomeIcon icon={faChevronRight} />
           </button>
@@ -244,6 +270,7 @@ const Table = ({ columns, data }) => {
             onClick={() => changePage(totalPages)}
             disabled={currentPage === totalPages}
             data-testid="last-page-btn"
+            aria-label="Go to last page"
           >
             <FontAwesomeIcon icon={faForwardStep} />
           </button>

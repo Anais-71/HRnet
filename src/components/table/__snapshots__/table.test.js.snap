@@ -27,9 +27,17 @@ exports[`Table matches the snapshot 1`] = `
             fill="currentColor"
           />
         </svg>
+        <label
+          class="visually-hidden"
+          for="searchInput"
+        >
+          Search
+        </label>
         <input
+          aria-label="Search table"
           class="header__controls--search--input"
           data-testid="search-input"
+          id="searchInput"
           placeholder="Search..."
           type="text"
           value=""
@@ -40,6 +48,7 @@ exports[`Table matches the snapshot 1`] = `
       >
         Show
         <select
+          aria-label="Select number of entries per page"
           class="header__controls--pages--select"
           data-testid="entries-per-page-select"
         >
@@ -68,6 +77,7 @@ exports[`Table matches the snapshot 1`] = `
       </div>
     </div>
     <table
+      aria-live="polite"
       class="table"
     >
       <thead
@@ -75,8 +85,10 @@ exports[`Table matches the snapshot 1`] = `
       >
         <tr>
           <th
+            aria-sort="none"
             class="table__header--row"
             data-testid="sort-column-name"
+            scope="col"
           >
             Name
           </th>
@@ -126,10 +138,13 @@ exports[`Table matches the snapshot 1`] = `
         Showing 1 to 3 of 3 entries
       </p>
       <div
+        aria-label="Pagination controls"
         class="table__footer--pagination"
         data-testid="pagination-buttons"
+        role="navigation"
       >
         <button
+          aria-label="Go to first page"
           class="table__footer--pagination--btn"
           data-testid="first-page-btn"
           disabled=""
@@ -151,6 +166,7 @@ exports[`Table matches the snapshot 1`] = `
           </svg>
         </button>
         <button
+          aria-label="Go to previous page"
           class="table__footer--pagination--btn"
           data-testid="prev-page-btn"
           disabled=""
@@ -172,12 +188,14 @@ exports[`Table matches the snapshot 1`] = `
           </svg>
         </button>
         <button
+          aria-label="Go to page 1"
           class="table__footer--pagination--btn active"
           data-testid="page-btn-1"
         >
           1
         </button>
         <button
+          aria-label="Go to next page"
           class="table__footer--pagination--btn"
           data-testid="next-page-btn"
           disabled=""
@@ -199,6 +217,7 @@ exports[`Table matches the snapshot 1`] = `
           </svg>
         </button>
         <button
+          aria-label="Go to last page"
           class="table__footer--pagination--btn"
           data-testid="last-page-btn"
           disabled=""

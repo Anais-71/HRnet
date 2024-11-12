@@ -10,10 +10,19 @@ import {
 
 const User = ({ user, onClose }) => (
   <div className="user">
-    <div className="user__popup">
+    <div
+      className="user__popup"
+      role="dialog"
+      aria-labelledby="userDetailsTitle"
+      aria-describedby="userDetailsDesc"
+    >
       <div className="user__popup--header">
-        <h2>User Details</h2>
-        <button className="user__popup--close" onClick={onClose}>
+        <h2 id="userDetailsTitle">User Details</h2>
+        <button
+          className="user__popup--close"
+          onClick={onClose}
+          aria-label="Close details"
+        >
           <FontAwesomeIcon
             icon={faXmark}
             className="user__popup--close--icon"
@@ -21,14 +30,23 @@ const User = ({ user, onClose }) => (
         </button>
       </div>
 
-      <div className="user__popup--section">
+      <div
+        className="user__popup--section"
+        aria-labelledby="detailsSectionTitle"
+        aria-describedby="detailsSectionDesc"
+      >
         <div className="user__popup--section--header">
           <div className="user__popup--section--header--icon icon">
             <FontAwesomeIcon icon={faUser} className="icon__fa" />
           </div>
-          <h3 className="user__popup--section--header--title">Details</h3>
+          <h3
+            id="detailsSectionTitle"
+            className="user__popup--section--header--title"
+          >
+            Details
+          </h3>
         </div>
-        <p className="user__popup--section--content">
+        <p id="detailsSectionDesc" className="user__popup--section--content">
           <strong>First Name:</strong> {user.firstName}
         </p>
         <p className="user__popup--section--content">
@@ -39,14 +57,23 @@ const User = ({ user, onClose }) => (
         </p>
       </div>
 
-      <div className="user__popup--section">
+      <div
+        className="user__popup--section"
+        aria-labelledby="addressSectionTitle"
+        aria-describedby="addressSectionDesc"
+      >
         <div className="user__popup--section--header">
           <div className="user__popup--section--header--icon icon">
             <FontAwesomeIcon icon={faLocationDot} className="icon__fa" />
           </div>
-          <h3 className="user__popup--section--header--title">Address</h3>
+          <h3
+            id="addressSectionTitle"
+            className="user__popup--section--header--title"
+          >
+            Address
+          </h3>
         </div>
-        <p className="user__popup--section--content">
+        <p id="addressSectionDesc" className="user__popup--section--content">
           <strong>Street:</strong> {user.street}
         </p>
         <p className="user__popup--section--content">
@@ -60,14 +87,23 @@ const User = ({ user, onClose }) => (
         </p>
       </div>
 
-      <div className="user__popup--section">
+      <div
+        className="user__popup--section"
+        aria-labelledby="positionSectionTitle"
+        aria-describedby="positionSectionDesc"
+      >
         <div className="user__popup--section--header">
           <div className="user__popup--section--header--icon icon">
             <FontAwesomeIcon icon={faBriefcase} className="icon__fa" />
           </div>
-          <h3 className="user__popup--section--header--title">Position</h3>
+          <h3
+            id="positionSectionTitle"
+            className="user__popup--section--header--title"
+          >
+            Position
+          </h3>
         </div>
-        <p className="user__popup--section--content">
+        <p id="positionSectionDesc" className="user__popup--section--content">
           <strong>Department:</strong> {user.department}
         </p>
         <p className="user__popup--section--content">

@@ -60,5 +60,10 @@
       border: none;
       background-color: $background;
     }
+
+    select[size]:focus {
+      padding-right: 15px;
+      overflow-y: hidden;
+    }
   }
 }
