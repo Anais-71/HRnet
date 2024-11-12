@@ -1,0 +1,33 @@
+{
+  "header": {
+    "create": "Create new employee",
+    "view": "View current employees"
+  },
+  "main": {
+    "createEmployeeTitle": "Create Employee",
+    "currentEmployeeTitle": "Current employees",
+    "details": "Details",
+    "firstName": "First Name",
+    "lastName": "Last Name",
+    "dateOfBirth": "Date of Birth",
+    "selectDate": "Please select a date",
+    "address": "Address",
+    "street": "Street",
+    "city": "City",
+    "state": "State",
+    "zipCode": "Zip Code",
+    "position": "Position",
+    "startDate": "Start Date",
+    "department": "Department",
+    "saveButton": "Save",
+    "error": "This field is required"
+  },
+  "modal": {
+    "message": "Employee successfully created!",
+    "createEmployee": "Create Employee",
+    "viewEmployees": "View Employees"
+  },
+  "footer": {
+    "copyright": "Copyright, Wealth Health 2024"
+  }
+}

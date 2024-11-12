@@ -1,0 +1,33 @@
+{
+  "header": {
+    "create": "Créer un employé",
+    "view": "Voir les employés"
+  },
+  "main": {
+    "createEmployeeTitle": "Créer un employé",
+    "currentEmployeeTitle": "Liste des employés",
+    "details": "Détails",
+    "firstName": "Prénom",
+    "lastName": "Nom",
+    "dateOfBirth": "Date de naissance",
+    "selectDate": "Veuillez sélectionner une date",
+    "address": "Adresse",
+    "street": "Rue",
+    "city": "Ville",
+    "state": "État",
+    "zipCode": "Code postal",
+    "position": "Poste",
+    "startDate": "Date de prise de poste",
+    "department": "Service",
+    "saveButton": "Enregistrer",
+    "error": "Ce champ est requis"
+  },
+  "modal": {
+    "message": "Employé créé !",
+    "createEmployee": "Créer un employé",
+    "viewEmployees": "Voir les employés"
+  },
+  "footer": {
+    "copyright": "Droits d'auteur, Wealth Health 2024"
+  }
+}

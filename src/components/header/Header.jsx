@@ -3,7 +3,11 @@ import React from 'react'
 import logo from '../../assets/img/logo.png'
 import './header.css'
 
+// Translation
+import { useTranslation } from 'react-i18next'
+
 function Header() {
+  const { t } = useTranslation()
   return (
     <div className="header">
       <div className="header__main">
@@ -12,10 +16,10 @@ function Header() {
       </div>
       <div className="header__nav">
         <a className="header__nav--link" href="/">
-          Create Employee
+          {t('header.create')}
         </a>
         <a className="header__nav--link" href="/employees">
-          View Current Employees
+          {t('header.view')}
         </a>
       </div>
     </div>

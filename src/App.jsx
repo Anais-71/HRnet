@@ -5,6 +5,9 @@ import Employees from './pages/employees/Employees'
 
 import { EmployeeProvider } from './pages/employees/EmployeesContext'
 
+//Translation
+import './i18n'
+
 function App() {
   return (
     <Router>

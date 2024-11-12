@@ -2,23 +2,28 @@ import React from 'react'
 import Table from '../../components/table/Table'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faAddressBook } from '@fortawesome/free-solid-svg-icons'
+
 import { useEmployeeContext } from './EmployeesContext'
 
+// Translation
+import { useTranslation } from 'react-i18next'
+
 function Employees() {
+  const { t } = useTranslation() // Initialize translation hook
   const { employees } = useEmployeeContext() // Utilise le contexte pour récupérer les employés
 
   // Définir les colonnes pour le tableau
   const columns = React.useMemo(
     () => [
-      { Header: 'First Name', accessor: 'firstName' },
-      { Header: 'Last Name', accessor: 'lastName' },
-      { Header: 'Date of Birth', accessor: 'dateOfBirth' },
-      { Header: 'Street', accessor: 'street' },
-      { Header: 'City', accessor: 'city' },
-      { Header: 'State', accessor: 'state' },
-      { Header: 'Zip Code', accessor: 'zipCode' },
-      { Header: 'Start Date', accessor: 'startDate' },
-      { Header: 'Department', accessor: 'department' },
+      { Header: t('main.firstName'), accessor: 'firstName' },
+      { Header: t('main.lastName'), accessor: 'lastName' },
+      { Header: t('main.dateOfBirth'), accessor: 'dateOfBirth' },
+      { Header: t('main.street'), accessor: 'street' },
+      { Header: t('main.city'), accessor: 'city' },
+      { Header: t('main.state'), accessor: 'state' },
+      { Header: t('main.zipCode'), accessor: 'zipCode' },
+      { Header: t('main.startDate'), accessor: 'startDate' },
+      { Header: t('main.department'), accessor: 'department' },
     ],
     [],
   )
@@ -29,10 +34,11 @@ function Employees() {
         <div className="main__header--icon icon">
           <FontAwesomeIcon icon={faAddressBook} className="icon__fa" />
         </div>
-        <h2 className="main__header--title">Current employees</h2>
+        <h2 className="main__header--title">
+          {t('main.currentEmployeeTitle')}
+        </h2>
       </div>
       <Table columns={columns} data={employees} />{' '}
-      {/* Passe les données du contexte au tableau */}
     </div>
   )
 }

@@ -21,14 +21,11 @@ import {
   faBriefcase,
 } from '@fortawesome/free-solid-svg-icons'
 
-/**
- * Home component for creating a new employee.
- *
- * This component includes a form to input employee details and displays a modal upon successful creation of an employee.
- *
- * @returns {JSX.Element} The rendered Home component.
- */
+// Translation
+import { useTranslation } from 'react-i18next'
+
 const Home = () => {
+  const { t } = useTranslation() // Initialize translation hook
   const { setEmployees } = useEmployeeContext()
   const navigate = useNavigate()
 
@@ -44,15 +41,14 @@ const Home = () => {
     startDate: '',
   })
 
-  const [errors, setErrors] = useState({}) // Store errors
+  const [errors, setErrors] = useState({})
   const [isModalOpen, setIsModalOpen] = useState(false)
 
-  // Validate the form
   const validateForm = () => {
     const newErrors = {}
     Object.keys(employeeData).forEach((key) => {
       if (!employeeData[key]) {
-        newErrors[key] = 'This field is required'
+        newErrors[key] = t('main.error')
       }
     })
     return newErrors
@@ -92,14 +88,14 @@ const Home = () => {
 
   const modalActions = [
     {
-      label: 'View all employees',
+      label: t('modal.viewEmployees'),
       onClick: () => {
         navigate('/employees')
         setIsModalOpen(false)
       },
     },
     {
-      label: 'Create new employee',
+      label: t('modal.createEmployee'),
       onClick: () => {
         setIsModalOpen(false)
       },
@@ -112,7 +108,7 @@ const Home = () => {
         <div className="main__header--icon icon">
           <FontAwesomeIcon icon={faPen} className="icon__fa" />
         </div>
-        <h2 className="main__header--title">Create employee</h2>
+        <h2 className="main__header--title">{t('main.createEmployeeTitle')}</h2>
       </div>
 
       <form id="create-employee" className="main__form">
@@ -121,9 +117,9 @@ const Home = () => {
             <div className="form__section--icon icon">
               <FontAwesomeIcon icon={faUser} className="icon__fa" />
             </div>
-            <div className="form__section--title">Details</div>
+            <div className="form__section--title">{t('main.details')}</div>
           </div>
-          <label htmlFor="first-name">First Name</label>
+          <label htmlFor="first-name">{t('main.firstName')}</label>
           <input
             type="text"
             id="first-name"
@@ -136,7 +132,7 @@ const Home = () => {
             <div className="main__form__error">{errors.firstName}</div>
           )}
 
-          <label htmlFor="last-name">Last Name</label>
+          <label htmlFor="last-name">{t('main.lastName')}</label>
           <input
             type="text"
             id="last-name"
@@ -149,7 +145,7 @@ const Home = () => {
             <div className="main__form__error">{errors.lastName}</div>
           )}
 
-          <label htmlFor="date-of-birth">Date of Birth</label>
+          <label htmlFor="date-of-birth">{t('main.dateOfBirth')}</label>
           <Datepicker
             idPrefix="date-of-birth"
             onChange={(date) => {
@@ -169,9 +165,9 @@ const Home = () => {
             <div className="form__section--icon icon">
               <FontAwesomeIcon icon={faLocationDot} className="icon__fa" />
             </div>
-            <div className="form__section--title">Address</div>
+            <div className="form__section--title">{t('main.address')}</div>
           </div>
-          <label htmlFor="street">Street</label>
+          <label htmlFor="street">{t('main.street')}</label>
           <input
             id="street"
             type="text"
@@ -184,7 +180,7 @@ const Home = () => {
             <div className="main__form__error">{errors.street}</div>
           )}
 
-          <label htmlFor="city">City</label>
+          <label htmlFor="city">{t('main.city')}</label>
           <input
             id="city"
             type="text"
@@ -193,13 +189,11 @@ const Home = () => {
             onChange={handleChange}
             autoComplete="address-level2"
           />
-          {errors.city && (
-            <div className="main__form__error">{errors.city}</div>
-          )}
+          {errors.city && <div className="home">{errors.city}</div>}
 
           <Select
             options={states}
-            label="State"
+            label={t('main.state')}
             value={employeeData.state}
             onChange={(e) =>
               setEmployeeData((prevData) => ({
@@ -215,7 +209,7 @@ const Home = () => {
             <div className="main__form__error">{errors.state}</div>
           )}
 
-          <label htmlFor="zip-code">Zip Code</label>
+          <label htmlFor="zip-code">{t('main.zipCode')}</label>
           <input
             id="zip-code"
             type="number"
@@ -234,9 +228,9 @@ const Home = () => {
             <div className="form__section--icon icon">
               <FontAwesomeIcon icon={faBriefcase} className="icon__fa" />
             </div>
-            <div className="form__section--title">Position</div>
+            <div className="form__section--title">{t('main.position')}</div>
           </div>
-          <label htmlFor="start-date">Start Date</label>
+          <label htmlFor="start-date">{t('main.startDate')}</label>
           <Datepicker
             idPrefix="start-date"
             onChange={(date) => {
@@ -252,7 +246,7 @@ const Home = () => {
 
           <Select
             options={department}
-            label="Department"
+            label={t('main.department')}
             value={employeeData.department}
             onChange={(e) =>
               setEmployeeData((prevData) => ({
@@ -270,13 +264,13 @@ const Home = () => {
         </div>
       </form>
       <button className="main__form__btn" onClick={saveEmployee}>
-        Save
+        {t('main.saveButton')}
       </button>
 
       {isModalOpen && (
         <Modal
           onClose={() => setIsModalOpen(false)}
-          message="Employee successfully created!"
+          message={t('modal.message')}
           actions={modalActions}
         />
       )}
