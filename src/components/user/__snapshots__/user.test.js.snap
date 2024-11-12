@@ -22,6 +22,7 @@ exports[`User component matches the snapshot 1`] = `
         <button
           aria-label="Close details"
           class="user__popup--close"
+          role="button"
         >
           <svg
             aria-hidden="true"

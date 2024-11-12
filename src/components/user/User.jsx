@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import './user.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
@@ -8,6 +9,16 @@ import {
   faBriefcase,
 } from '@fortawesome/free-solid-svg-icons'
 
+/**
+ * User component that displays detailed information of a selected user.
+ *
+ * @component
+ * @param {Object} props - The properties passed to the component.
+ * @param {Object} props.user - The user object containing details to display.
+ * @param {function} props.onClose - The function to call when closing the popup.
+ *
+ * @returns {JSX.Element} The rendered User details popup.
+ */
 const User = ({ user, onClose }) => (
   <div className="user">
     <div
@@ -22,6 +33,7 @@ const User = ({ user, onClose }) => (
           className="user__popup--close"
           onClick={onClose}
           aria-label="Close details"
+          role="button"
         >
           <FontAwesomeIcon
             icon={faXmark}
@@ -113,5 +125,29 @@ const User = ({ user, onClose }) => (
     </div>
   </div>
 )
+
+User.propTypes = {
+  /**
+   * The user object containing the details to display.
+   * The shape of the user object is defined below.
+   */
+  user: PropTypes.shape({
+    firstName: PropTypes.string.isRequired,
+    lastName: PropTypes.string.isRequired,
+    dateOfBirth: PropTypes.string.isRequired,
+    street: PropTypes.string.isRequired,
+    city: PropTypes.string.isRequired,
+    state: PropTypes.string.isRequired,
+    zipCode: PropTypes.string.isRequired,
+    department: PropTypes.string.isRequired,
+    startDate: PropTypes.string.isRequired,
+  }).isRequired,
+
+  /**
+   * The function to be called when the user clicks the close button.
+   * This will typically be used to close the details popup.
+   */
+  onClose: PropTypes.func.isRequired,
+}
 
 export default User

@@ -3,16 +3,28 @@ import Table from '../../components/table/Table'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faAddressBook } from '@fortawesome/free-solid-svg-icons'
 
-import { useEmployeeContext } from './EmployeesContext'
+import { useEmployeeContext } from './useEmployeeContext'
 
-// Translation
+// Translation hook
 import { useTranslation } from 'react-i18next'
 
+/**
+ * Component displaying the list of current employees in a table.
+ * It retrieves employee data from the EmployeeContext and uses i18n for localization.
+ *
+ * @component
+ * @returns {JSX.Element} The rendered employee list page with a table of employees.
+ */
 function Employees() {
-  const { t } = useTranslation() // Initialize translation hook
-  const { employees } = useEmployeeContext() // Utilise le contexte pour récupérer les employés
+  const { t } = useTranslation() // Initialize the translation hook
+  const { employees } = useEmployeeContext() // Use context to get employee data
 
-  // Définir les colonnes pour le tableau
+  /**
+   * Defines the columns for the employee data table, utilizing i18n for localization.
+   *
+   * @type {Array} columns - Array of column definitions for the table.
+   * Each column includes a 'Header' for display and an 'accessor' for the corresponding data field.
+   */
   const columns = React.useMemo(
     () => [
       { Header: t('main.firstName'), accessor: 'firstName' },
@@ -25,7 +37,7 @@ function Employees() {
       { Header: t('main.startDate'), accessor: 'startDate' },
       { Header: t('main.department'), accessor: 'department' },
     ],
-    [],
+    [t], // Recalculate columns when the translation function changes
   )
 
   return (
@@ -35,10 +47,11 @@ function Employees() {
           <FontAwesomeIcon icon={faAddressBook} className="icon__fa" />
         </div>
         <h2 className="main__header--title">
-          {t('main.currentEmployeeTitle')}
+          {t('main.currentEmployeeTitle')} {/* Localized title */}
         </h2>
       </div>
-      <Table columns={columns} data={employees} />{' '}
+      {/* Render Table component with columns and employee data */}
+      <Table columns={columns} data={employees} />
     </div>
   )
 }

@@ -10,7 +10,7 @@ import Select from '../../components/select/Select'
 import Modal from '../../components/modal/Modal'
 
 // Context
-import { useEmployeeContext } from '../employees/EmployeesContext'
+import { useEmployeeContext } from '../employees/useEmployeeContext'
 
 // Icons
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'

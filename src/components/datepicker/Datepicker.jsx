@@ -1,5 +1,6 @@
 import React, { useState, useRef } from 'react'
 import './Datepicker.css'
+import PropTypes from 'prop-types'
 
 const Datepicker = ({ idPrefix, onChange }) => {
   const [isOpen, setIsOpen] = useState(false)
@@ -170,6 +171,11 @@ const Datepicker = ({ idPrefix, onChange }) => {
       )}
     </div>
   )
+}
+
+Datepicker.propTypes = {
+  idPrefix: PropTypes.string.isRequired,
+  onChange: PropTypes.func.isRequired,
 }
 
 export default Datepicker

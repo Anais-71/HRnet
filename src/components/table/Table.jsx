@@ -1,4 +1,5 @@
 import React, { useState, useMemo, useEffect } from 'react'
+import PropTypes from 'prop-types'
 import './table.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
@@ -13,6 +14,16 @@ import {
 
 import User from '../user/User'
 
+/**
+ * Table component that renders a sortable, searchable, and paginated table.
+ *
+ * @component
+ * @param {Object} props - The properties passed to the component.
+ * @param {Array} props.columns - The columns to display in the table, each containing a Header and accessor.
+ * @param {Array} props.data - The data to display in the table, each row corresponding to an object with key-value pairs.
+ *
+ * @returns {JSX.Element} The rendered Table component.
+ */
 const Table = ({ columns, data }) => {
   const [searchTerm, setSearchTerm] = useState('')
   const [sortConfig, setSortConfig] = useState({ key: null, direction: 'asc' })
@@ -21,12 +32,20 @@ const Table = ({ columns, data }) => {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth)
   const [selectedUser, setSelectedUser] = useState(null)
 
+  /**
+   * Handles window resizing to update the window width state.
+   */
   useEffect(() => {
     const handleResize = () => setWindowWidth(window.innerWidth)
     window.addEventListener('resize', handleResize)
     return () => window.removeEventListener('resize', handleResize)
   }, [])
 
+  /**
+   * Memoized sorted data based on the selected sort key and direction.
+   *
+   * @returns {Array} Sorted data based on the current sort configuration.
+   */
   const sortedData = useMemo(() => {
     let sorted = [...data]
     if (sortConfig.key) {
@@ -48,6 +67,11 @@ const Table = ({ columns, data }) => {
     return sorted
   }, [data, sortConfig])
 
+  /**
+   * Memoized filtered data based on the search term.
+   *
+   * @returns {Array} Data filtered by the search term.
+   */
   const filteredData = useMemo(() => {
     return sortedData.filter((item) =>
       Object.values(item).some((value) =>
@@ -56,6 +80,11 @@ const Table = ({ columns, data }) => {
     )
   }, [sortedData, searchTerm])
 
+  /**
+   * Data to be displayed on the current page, based on pagination settings.
+   *
+   * @returns {Array} The paginated subset of filtered and sorted data.
+   */
   const displayedData = filteredData.slice(
     (currentPage - 1) * entriesPerPage,
     currentPage * entriesPerPage,
@@ -64,6 +93,11 @@ const Table = ({ columns, data }) => {
   const totalEntries = filteredData.length
   const totalPages = Math.ceil(totalEntries / entriesPerPage)
 
+  /**
+   * Toggles the sorting direction for a column when clicked.
+   *
+   * @param {string} key - The column key to sort by.
+   */
   const handleSort = (key) => {
     setSortConfig((prev) => ({
       key,
@@ -71,16 +105,31 @@ const Table = ({ columns, data }) => {
     }))
   }
 
+  /**
+   * Handles input changes for the search term, resetting to the first page.
+   *
+   * @param {Object} e - The input change event.
+   */
   const handleSearch = (e) => {
     setSearchTerm(e.target.value)
     setCurrentPage(1)
   }
 
+  /**
+   * Handles the selection of entries per page.
+   *
+   * @param {Object} e - The select change event for entries per page.
+   */
   const handleEntriesPerPage = (e) => {
     setEntriesPerPage(Number(e.target.value))
     setCurrentPage(1)
   }
 
+  /**
+   * Changes the current page number when a pagination button is clicked.
+   *
+   * @param {number} page - The page number to navigate to.
+   */
   const changePage = (page) => {
     if (page >= 1 && page <= totalPages) {
       setCurrentPage(page)
@@ -90,6 +139,11 @@ const Table = ({ columns, data }) => {
   const startEntry = (currentPage - 1) * entriesPerPage + 1
   const endEntry = Math.min(currentPage * entriesPerPage, totalEntries)
 
+  /**
+   * Handles the click on a user row to select a user and show their details.
+   *
+   * @param {Object} user - The user object to be displayed.
+   */
   const handleUserClick = (user) => {
     setSelectedUser(user)
   }
@@ -282,6 +336,22 @@ const Table = ({ columns, data }) => {
       )}
     </div>
   )
+}
+
+Table.propTypes = {
+  columns: PropTypes.arrayOf(
+    PropTypes.shape({
+      Header: PropTypes.string.isRequired,
+      accessor: PropTypes.string.isRequired,
+    }),
+  ).isRequired,
+  data: PropTypes.arrayOf(
+    PropTypes.shape({
+      firstName: PropTypes.string,
+      lastName: PropTypes.string,
+      // You can add other keys here based on your table data
+    }),
+  ).isRequired,
 }
 
 export default Table
