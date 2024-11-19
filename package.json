@@ -13,13 +13,16 @@
   "dependencies": {
     "@fortawesome/free-solid-svg-icons": "^6.6.0",
     "@fortawesome/react-fontawesome": "^0.2.2",
+    "datepicker-green-p14": "^1.0.0",
     "i18next": "^23.16.5",
     "i18next-browser-languagedetector": "^8.0.0",
     "jest-environment-jsdom": "^29.7.0",
+    "modal-react-p14-anais": "^1.0.1",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-i18next": "^15.1.1",
-    "react-table": "^7.8.0"
+    "react-table": "^7.8.0",
+    "select-p14": "^1.0.0"
   },
   "devDependencies": {
     "@babel/preset-env": "^7.25.9",

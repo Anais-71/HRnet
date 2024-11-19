@@ -4,10 +4,10 @@ import { department } from './department'
 import { useNavigate } from 'react-router-dom'
 import './home.css'
 
-// Components
-import Datepicker from '../../components/datepicker/Datepicker'
-import Select from '../../components/select/Select'
-import Modal from '../../components/modal/Modal'
+// Plugins
+import Datepicker from 'datepicker-green-p14'
+import Select from 'select-p14/src'
+import Modal from 'modal-react-p14-anais'
 
 // Context
 import { useEmployeeContext } from '../employees/useEmployeeContext'

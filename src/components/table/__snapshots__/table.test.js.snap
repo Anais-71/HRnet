@@ -28,7 +28,7 @@ exports[`Table matches the snapshot 1`] = `
           />
         </svg>
         <label
-          class="visually-hidden"
+          class="visually-hidden header__controls--search--label"
           for="searchInput"
         >
           Search

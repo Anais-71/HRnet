@@ -160,7 +160,10 @@ const Table = ({ columns, data }) => {
             className="header__controls--search--icon"
             aria-hidden="true"
           />
-          <label htmlFor="searchInput" className="visually-hidden">
+          <label
+            htmlFor="searchInput"
+            className="visually-hidden header__controls--search--label"
+          >
             Search
           </label>
           <input

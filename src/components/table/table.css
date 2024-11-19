@@ -8,6 +8,9 @@
   display: flex;
   justify-content: space-between;
 }
+.header__controls--search--label {
+  display: none;
+}
 .header__controls--search--input {
   position: absolute;
   width: 19%;
